@@ -11,8 +11,6 @@ import styles from "./styles"
 
 import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base'
 
-
-
 export default class Auth extends React.Component {
 
   constructor(props) {
@@ -97,7 +95,6 @@ export default class Auth extends React.Component {
       })
     }
   }
-
 
 
   render() {
