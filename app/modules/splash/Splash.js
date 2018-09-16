@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 
 import * as c from "../../config/constants";
 
@@ -53,7 +53,10 @@ export default class Splash extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <Container style={styles.container}>
-
+      <Image
+        style={styles.stretch}
+        source={require('../../../assets/splash.png')}
+      />
       </Container>
     );
   }
@@ -65,5 +68,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent: 'center',
     padding: 10
+  },
+  stretch: {
+    flex:1
   },
 });
