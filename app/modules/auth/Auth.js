@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 
 import * as c from "../../config/constants";
 
 import * as firebase from 'firebase';
+import { Constants, Google } from 'expo';
 
 import styles from "./styles"
 
@@ -61,7 +62,7 @@ export default class Auth extends React.Component {
   async loginWithFacebook() {
 
     //ENTER YOUR APP ID
-    const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('422787374529885', { permissions: ['public_profile'] })
+    const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(c.FACEBOOK_APP_ID, { permissions: ['public_profile'] })
 
     if (type == 'success') {
 
@@ -73,6 +74,31 @@ export default class Auth extends React.Component {
       })
     }
   }
+
+  async loginWithGoogle() {
+
+    //ENTER YOUR APP ID
+    const result = await Expo.Google.logInAsync({
+      androidStandaloneAppClientId: c.androidStandaloneAppClientId,
+      iosStandaloneAppClientId: c.iosStandaloneAppClientId,
+      androidClientId: c.androidClientId,
+      iosClientId: c.iosClientId,
+      scopes: ['profile', 'email']
+    });
+    console.log(result.type)
+    if (result.type == 'success') {
+      console.log(result.accessToken);
+
+      const credential = firebase.auth.GoogleAuthProvider.credential(result.idToken,result.accessToken)
+
+      firebase.auth().signInWithCredential(credential).catch((error) => {
+        console.log(error)
+
+      })
+    }
+  }
+
+
 
   render() {
     const { navigate } = this.props.navigation;
@@ -123,6 +149,15 @@ export default class Auth extends React.Component {
             onPress={() => this.loginWithFacebook()}
           >
             <Text style={{ color: 'white' }}> Login With Facebook</Text>
+          </Button>
+
+          <Button style={{ marginTop: 10 }}
+            full
+            rounded
+            primary
+            onPress={() => this.loginWithGoogle()}
+          >
+            <Text style={{ color: 'white' }}> Login With Google</Text>
           </Button>
 
 
