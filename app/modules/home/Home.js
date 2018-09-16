@@ -5,6 +5,8 @@ import { Button } from 'native-base';
 
 import * as firebase from 'firebase';
 
+import styles from "./styles"
+
 export default class Home extends React.Component {
 
   logout = () => {
@@ -26,25 +28,16 @@ export default class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
+        <Text style={styles.textField}>Open up App.js to start working on your app!</Text>
         <Button style={{ marginTop: 10 }}
           full
           rounded
           success
           onPress={() => this.logout()}
         >
-          <Text style={{ color: 'white' }}>Logout</Text>
+          <Text style={[styles.textField,{color:'white'}]}>Logout</Text>
         </Button>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

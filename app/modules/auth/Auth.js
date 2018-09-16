@@ -5,6 +5,7 @@ import * as c from "../../config/constants";
 
 import * as firebase from 'firebase';
 
+import styles from "./styles"
 
 
 import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base'
@@ -24,7 +25,7 @@ export default class Auth extends React.Component {
 
   componentDidMount() {
 
-  
+
   }
 
   signUpUser = (email, password) => {
@@ -98,10 +99,9 @@ export default class Auth extends React.Component {
             />
           </Item>
 
-          <Button style={{ marginTop: 10 }}
+          <Button style={{ marginTop: 10, backgroundColor: 'red' }}
             full
             rounded
-            success
             onPress={() => this.loginUser(this.state.email, this.state.password)}
           >
             <Text style={{ color: 'white' }}> Login</Text>
@@ -132,12 +132,3 @@ export default class Auth extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    padding: 10
-  },
-});

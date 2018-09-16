@@ -1,4 +1,8 @@
 {
-  "packagerPort": 19001,
-  "packagerPid": 10552
+  "packagerPort": 19003,
+  "packagerPid": 21928,
+  "expoServerPort": 19001,
+  "expoServerNgrokUrl": "https://jz-bww.obatlle.wewe.exp.direct",
+  "packagerNgrokUrl": "https://packager.jz-bww.obatlle.wewe.exp.direct",
+  "ngrokPid": 25024
 }

@@ -5,6 +5,8 @@ import * as c from "../../config/constants";
 
 import * as firebase from 'firebase';
 
+import styles from "./styles"
+
 // Initialize Firebase
 const firebaseConfig = {
     apiKey: c.FIREBASE_API_KEY,
@@ -61,15 +63,3 @@ export default class Splash extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    padding: 10
-  },
-  stretch: {
-    flex:1
-  },
-});
