@@ -1,9 +1,4 @@
 {
-  "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": "https://jz-bww.obatlle.wewe.exp.direct",
-  "packagerNgrokUrl": "https://packager.jz-bww.obatlle.wewe.exp.direct",
-  "ngrokPid": 16244
+  "packagerPort": 19001,
+  "packagerPid": 10552
 }
