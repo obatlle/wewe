@@ -5,9 +5,21 @@ import { Button } from 'native-base';
 
 import * as firebase from 'firebase';
 
-import styles from "./styles"
+import styles from "./styles";
+
+import { Analytics, PageHit, Event } from 'expo-analytics';
+
+
 
 export default class Home extends React.Component {
+
+  componentDidMount(){
+    const analytics = new Analytics('UA-126042363-1');
+    analytics.event(new Event('Screen', 'Home'))
+      .then(() => console.log("success"))
+      .catch(e => console.log(e.message));
+  }
+
 
   logout = () => {
     const { navigate } = this.props.navigation;

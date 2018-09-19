@@ -8,8 +8,12 @@ import { Constants, Google } from 'expo';
 
 import styles from "./styles"
 
+import { Analytics, ScreenHit } from 'expo-analytics';
 
-import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base'
+
+import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base';
+
+
 
 export default class Auth extends React.Component {
 
@@ -23,8 +27,10 @@ export default class Auth extends React.Component {
   }
 
   componentDidMount() {
-
-
+    const analytics = new Analytics('UA-126042363-1');
+    analytics.hit(new ScreenHit('Auth2'))
+      .then(() => console.log("success"))
+      .catch(e => console.log(e.message));
   }
 
   signUpUser = (email, password) => {

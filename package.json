@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "expo": "^30.0.1",
+    "expo-analytics": "^1.0.7",
     "firebase": "^4.8.0",
     "native-base": "^2.3.5",
     "node-fetch": "^1.7.3",
