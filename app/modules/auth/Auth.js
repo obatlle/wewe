@@ -28,33 +28,36 @@ export default class Auth extends React.Component {
   }
 
   signUpUser = (email, password) => {
+    firebase.auth()
+    .createUserWithEmailAndPassword(email, password)
+    .catch(error => {
+      console.log('errr')
+        switch(error.code) {
 
-    try {
-
-      if (this.state.password.length < 6) {
-        alert("Please enter atleast 6 characters")
-        return;
-      }
-
-      firebase.auth().createUserWithEmailAndPassword(email, password)
-    }
-    catch (error) {
-      console.log(error.toString())
-    }
+            case 'auth/email-already-in-use':
+                // do something
+               break;
+           // handle other codes ...
+       }
+    });
   }
 
   loginUser = (email, password) => {
+    firebase.auth()
+    .signInWithEmailAndPassword(email, password)
+    .catch(error => {
+      this.signUpUser(email, password)
+      console.log('errr')
+        switch(error.code) {
 
-    try {
+            case 'auth/email-already-in-use':
+                // do something
+               break;
+           // handle other codes ...
+       }
+    });
 
-      firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
-        console.log(user)
 
-      })
-    }
-    catch (error) {
-      console.log(error.toString())
-    }
   }
 
   async loginWithFacebook() {
@@ -122,39 +125,33 @@ export default class Auth extends React.Component {
             />
           </Item>
 
-          <Button style={{ marginTop: 10, backgroundColor: 'red' }}
-            full
-            rounded
-            onPress={() => this.loginUser(this.state.email, this.state.password)}
-          >
-            <Text style={{ color: 'white' }}> Login</Text>
-          </Button>
-
-          <Button style={{ marginTop: 10 }}
-            full
-            rounded
-            primary
-            onPress={() => this.signUpUser(this.state.email, this.state.password)}
-          >
-            <Text style={{ color: 'white' }}> Sign Up</Text>
-          </Button>
-
-          <Button style={{ marginTop: 10 }}
+          <Button style={{ marginTop: 10,backgroundColor: '#4267b2', borderRadius: 30, marginLeft:15, marginRight:15 }}
             full
             rounded
             primary
             onPress={() => this.loginWithFacebook()}
           >
-            <Text style={{ color: 'white' }}> Login With Facebook</Text>
+            <Text style={{ color: 'white' }}>Sign in with Facebook</Text>
           </Button>
 
-          <Button style={{ marginTop: 10 }}
+          <Button style={{ marginTop: 10,backgroundColor: '#4285F4', borderRadius: 30, marginLeft:15, marginRight:15 }}
             full
             rounded
             primary
             onPress={() => this.loginWithGoogle()}
           >
-            <Text style={{ color: 'white' }}> Login With Google</Text>
+            <Text style={{ color: 'white' }}> Sign in with Google</Text>
+          </Button>
+
+          <View style={{marginTop: 10, height:1, backgroundColor:'#CACACA', marginLeft:15, marginRight:15 }}>
+          </View>
+
+          <Button style={{ marginTop: 10,backgroundColor: 'red', borderRadius: 30, marginLeft:15, marginRight:15 }}
+            full
+            rounded
+            onPress={() => this.loginUser(this.state.email, this.state.password)}
+          >
+            <Text style={{ color: 'white' }}> Login</Text>
           </Button>
 
 
