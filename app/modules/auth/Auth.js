@@ -28,7 +28,7 @@ export default class Auth extends React.Component {
 
   componentDidMount() {
     const analytics = new Analytics('UA-126042363-1');
-    analytics.hit(new ScreenHit('Auth2'))
+    analytics.hit(new ScreenHit('Auth'))
       .then(() => console.log("success"))
       .catch(e => console.log(e.message));
   }
