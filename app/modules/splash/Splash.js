@@ -5,7 +5,9 @@ import * as c from "../../config/constants";
 
 import * as firebase from 'firebase';
 
-import styles from "./styles"
+import styles from "./styles";
+
+import { Analytics, ScreenHit, Event } from 'expo-analytics';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -37,6 +39,10 @@ export default class Splash extends React.Component {
   }
 
   componentDidMount() {
+    const analytics = new Analytics('UA-126042363-1');
+    analytics.hit(new ScreenHit('Splash'))
+      .then(() => console.log("success"))
+      .catch(e => console.log(e.message));
 
     firebase.auth().onAuthStateChanged((user) => {
       const { navigate } = this.props.navigation;

@@ -7,7 +7,7 @@ import * as firebase from 'firebase';
 
 import styles from "./styles";
 
-import { Analytics, PageHit, Event } from 'expo-analytics';
+import { Analytics, ScreenHit, Event } from 'expo-analytics';
 
 
 
@@ -15,7 +15,7 @@ export default class Home extends React.Component {
 
   componentDidMount(){
     const analytics = new Analytics('UA-126042363-1');
-    analytics.event(new Event('Screen', 'Home'))
+    analytics.hit(new ScreenHit('Home'))
       .then(() => console.log("success"))
       .catch(e => console.log(e.message));
   }
@@ -24,17 +24,24 @@ export default class Home extends React.Component {
   logout = () => {
     const { navigate } = this.props.navigation;
 
-    try {
-      firebase.auth().signOut().then(function() {
-        // Sign-out successful.
-        }, function(error) {
-          console.log(error)
-          // An error happened.
-        });
-    }
-    catch (error) {
-      console.log(error.toString())
-    }
+    //Tracking event: logout
+    const analytics = new Analytics('UA-126042363-1');
+    analytics.event(new Event('logout', 'home'))
+      .then(() => console.log("success"))
+      .catch(e => console.log(e.message));
+
+    firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+      }, function(error) {
+        console.log(error)
+        // An error happened.
+        //Tracking event: error
+        const analytics = new Analytics('UA-126042363-1');
+        analytics.event(new Event('error', 'signout',error))
+          .then(() => console.log("success"))
+          .catch(e => console.log(e.message));
+      });
+
   }
 
   render() {
