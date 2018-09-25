@@ -8,10 +8,28 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: color.white,
       justifyContent: 'center',
-      padding: 10
+
     },
-    textField :{
-      fontFamily: fontFamily.regular
+    searchBar :{
+      marginTop:20,
+      height:50,
+      flexDirection:'row'
+    },
+    categoryBar :{
+      height:50,
+      flexDirection:'row',
+      alignItems:'center',
+    },
+    feedContainer :{
+      flex:1,
+      backgroundColor:'#F1F5F8',
+      padding:10,
+      paddingBottom:0,
+      paddingTop:5,
+
+    },
+    categoryText:{
+      flex:1
     },
 
 

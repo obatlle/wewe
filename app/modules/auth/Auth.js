@@ -142,7 +142,7 @@ export default class Auth extends React.Component {
           {!this.state.showEmailForm? (
             <View>
               <View style={{height:400, width:300, backgroundColor:'black', alignSelf:'center'}}>
-                <Swiper style={styles.wrapper} showsButtons={true}>
+                <Swiper style={styles.wrapper} showsButtons={false} autoplay={true}>
                   <View style={styles.slide1}>
                     <Text style={styles.text}>Hello Swiper</Text>
                   </View>
