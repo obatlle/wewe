@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 
     },
     searchBar :{
-      marginTop:20,
+      marginTop:0,
       height:50,
       flexDirection:'row'
     },
@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
       padding:10,
       paddingBottom:0,
       paddingTop:5,
+      marginTop:0
 
     },
     categoryText:{
