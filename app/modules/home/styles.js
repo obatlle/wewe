@@ -16,9 +16,11 @@ const styles = StyleSheet.create({
       flexDirection:'row'
     },
     categoryBar :{
-      height:50,
+      height:40,
       flexDirection:'row',
       alignItems:'center',
+      paddingLeft:20,
+      paddingRight:20
     },
     feedContainer :{
       flex:1,
@@ -30,7 +32,9 @@ const styles = StyleSheet.create({
 
     },
     categoryText:{
-      flex:1
+      flex:1,
+      fontFamily:'RobotoBold',
+      color:'#999999'
     },
 
 

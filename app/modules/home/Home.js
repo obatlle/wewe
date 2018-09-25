@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image,Platform  } from 'react-native';
+import { StyleSheet, Text, View, Image,Platform, TextInput  } from 'react-native';
 
 import { Button } from 'native-base';
 
@@ -16,33 +16,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { CollapsibleHeaderScrollView } from 'react-native-collapsible-header-views';
 
 
-const Header = () => (
-  <View>
-    <View style={styles.searchBar}>
-      <View style={{flex:1,height:50, alignItems:'center'}}>
-        <Image
-          style={{marginTop:10}}
-          source={require('../../assets/images/app_logo_thumbnail.png')}
-        />
-      </View>
-      <View style={{flex:4,height:35, backgroundColor:'#F0F0F0', borderRadius:30, alignSelf:'center'}}>
-      </View>
-      <View style={{flex:1,height:50, alignItems:'center'}}>
-        <Ionicons style={{marginTop:10}} name="md-funnel" size={27} color="black" />
-      </View>
-    </View>
-    <View style={styles.categoryBar}>
-      <Text style={styles.categoryText}>Text1</Text>
-      <Text style={styles.categoryText}>Text1</Text>
-      <Text style={styles.categoryText}>Text1</Text>
-      <Text style={styles.categoryText}>Text1</Text>
-      <Text style={styles.categoryText}>Text1</Text>
-      <Text style={styles.categoryText}>Text1</Text>
-    </View>
-  </View>
-);
-
-
 
 export default class Home extends React.Component {
 
@@ -51,7 +24,17 @@ export default class Home extends React.Component {
     analytics.hit(new ScreenHit('Home'))
       .then(() => console.log("success"))
       .catch(e => console.log(e.message));
+
   }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      search: 'Search on Wewe',
+    };
+  }
+
+
 
 
   logout = () => {
@@ -81,8 +64,40 @@ export default class Home extends React.Component {
     return (
       <View style={styles.container}>
         <CollapsibleHeaderScrollView
-          CollapsibleHeaderComponent={<Header />}
-          headerHeight={120}
+          CollapsibleHeaderComponent={
+            <View>
+              <View style={styles.searchBar}>
+                <View style={{flex:1,height:50, alignItems:'center'}}>
+                  <Image
+                    style={{marginTop:10}}
+                    source={require('../../assets/images/app_logo_thumbnail.png')}
+                  />
+                </View>
+                <View style={{flex:4,height:35, backgroundColor:'#F0F0F0', borderRadius:30, alignSelf:'center', flexDirection:'row'}}>
+                  <Ionicons style={{marginTop:8, marginLeft:18}} name="ios-search" size={20} color="#9E9E9E" />
+                  <TextInput
+                    style={{height: 30, flex:1, color:'#9E9E9E', alignSelf:'center',marginLeft:10}}
+                    clearButtonMode={'while-editing'}
+                    clearTextOnFocus={true}
+                    onChangeText={(search) => this.setState({search})}
+                    value={this.state.search}
+                  />
+                </View>
+                <View style={{flex:1,height:50, alignItems:'center'}}>
+                  <Ionicons style={{marginTop:10}} name="md-funnel" size={27} color="black" />
+                </View>
+              </View>
+              <View style={styles.categoryBar}>
+                <Text style={[styles.categoryText,{color:'#FF3F56'}]}>NEW!</Text>
+                <Text style={styles.categoryText}>Food</Text>
+                <Text style={styles.categoryText}>Phones</Text>
+                <Text style={styles.categoryText}>Home</Text>
+                <Text style={styles.categoryText}>Sports</Text>
+                <Text style={styles.categoryText}>Fashion</Text>
+              </View>
+            </View>
+          }
+          headerHeight={115}
           statusBarHeight={Platform.OS === 'ios' ? 20 : 0}
         >
         <View>
