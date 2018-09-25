@@ -13,6 +13,8 @@ import { Analytics, ScreenHit, Event } from 'expo-analytics';
 
 import { Container, Form, Input, Item, Button, Label } from 'native-base';
 
+import Swiper from 'react-native-swiper';
+
 
 
 export default class Auth extends React.Component {
@@ -140,6 +142,17 @@ export default class Auth extends React.Component {
           {!this.state.showEmailForm? (
             <View>
               <View style={{height:400, width:300, backgroundColor:'black', alignSelf:'center'}}>
+                <Swiper style={styles.wrapper} showsButtons={true}>
+                  <View style={styles.slide1}>
+                    <Text style={styles.text}>Hello Swiper</Text>
+                  </View>
+                  <View style={styles.slide2}>
+                    <Text style={styles.text}>Beautiful</Text>
+                  </View>
+                  <View style={styles.slide3}>
+                    <Text style={styles.text}>And simple</Text>
+                  </View>
+                </Swiper>
               </View>
               <View style={{height:20, width:200, alignSelf:'center'}}>
               </View>
