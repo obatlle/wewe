@@ -6,6 +6,7 @@ import { StackNavigator } from 'react-navigation';
 import Auth from './auth/Auth';
 import Home from './home/Home';
 import Splash from './splash/Splash';
+import Scan from './scan/Scan';
 
 const MainStack = StackNavigator(
   {
@@ -17,6 +18,9 @@ const MainStack = StackNavigator(
     },
     Splash: {
       screen: Splash,
+    },
+    Scan: {
+      screen: Scan,
     },
   },
   {

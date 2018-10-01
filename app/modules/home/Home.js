@@ -61,6 +61,8 @@ export default class Home extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
+
     return (
       <View style={styles.container}>
         <CollapsibleHeaderScrollView
@@ -170,17 +172,24 @@ export default class Home extends React.Component {
               ]}
             />
             </View>
-          <Button style={{ marginTop: 10 }}
-            full
-            rounded
-            success
-            onPress={() => this.logout()}
-          >
-            <Text style={[styles.textField,{color:'white'}]}>Logout</Text>
-          </Button>
-        </View>
+            <Button style={{ marginTop: 10 }}
+              full
+              rounded
+              success
+              onPress={() => navigate('Scan')}
+            >
+            <Text style={[styles.textField,{color:'white'}]}>Scan a product</Text>
+            </Button>
+            <Button style={{ marginTop: 10 }}
+              full
+              rounded
+              success
+              onPress={() => this.logout()}
+            >
+              <Text style={[styles.textField,{color:'white'}]}>Logout</Text>
+            </Button>
+          </View>
         </CollapsibleHeaderScrollView>
-
       </View>
 
     );
