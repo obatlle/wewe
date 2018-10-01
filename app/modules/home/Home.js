@@ -11,7 +11,7 @@ import { Analytics, ScreenHit, Event } from 'expo-analytics';
 
 import Masonry from 'react-native-masonry';
 
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { CollapsibleHeaderScrollView } from 'react-native-collapsible-header-views';
 
@@ -172,13 +172,14 @@ export default class Home extends React.Component {
               ]}
             />
             </View>
-            <Button style={{ marginTop: 10 }}
+            <Button style={{marginTop:10}}
               full
               rounded
               success
               onPress={() => navigate('Scan')}
             >
-            <Text style={[styles.textField,{color:'white'}]}>Scan a product</Text>
+              <MaterialCommunityIcons style={{}} name="barcode-scan" size={30} color="white" />
+              <Text style={[styles.textField,{color:'white', marginLeft:8}]}>Scan</Text>
             </Button>
             <Button style={{ marginTop: 10 }}
               full

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View , Alert} from 'react-native';
+import { StyleSheet, Text, View , Alert, Dimensions} from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
 
 import { Button } from 'native-base';
@@ -9,6 +9,8 @@ import styles from "./styles";
 import { Analytics, ScreenHit, Event } from 'expo-analytics';
 
 import { Ionicons } from '@expo/vector-icons';
+
+var {height, width} = Dimensions.get('window');
 
 
 export default class Scan extends React.Component {
@@ -50,10 +52,16 @@ export default class Scan extends React.Component {
           <Text>Requesting for camera permission</Text> :
           this.state.hasCameraPermission === false ?
             <Text>Camera permission is not granted</Text> :
-            <BarCodeScanner
-              onBarCodeRead={this._handleBarCodeRead}
-              style={{ height: 300, width: 300 }}
-            />
+            <View>
+              <BarCodeScanner
+                onBarCodeRead={this._handleBarCodeRead}
+                style={{ height: height, width: width }}
+              />
+              <View style={{width:width*0.8, height:height*0.3, position:'absolute', bottom:height*0.4, alignSelf:'center'}}>
+                <Text style={{alignSelf:'center', fontSize: 18, color:'white',fontFamily:'RobotoLight',marginBottom:12}}>Scan a product barcode</Text>
+                <View style={{borderColor:'white', borderRadius:10, borderWidth:2, width:width*0.8, flex:1, alignSelf:'center'}}/>
+              </View>
+            </View>
         }
       </View>
     );
