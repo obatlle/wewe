@@ -11,7 +11,7 @@ import { Analytics, ScreenHit, Event } from 'expo-analytics';
 
 import Masonry from 'react-native-masonry';
 
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { CollapsibleHeaderScrollView } from 'react-native-collapsible-header-views';
 
@@ -62,6 +62,8 @@ export default class Home extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
+
     return (
       <View style={styles.container}>
         <CollapsibleHeaderScrollView
@@ -173,6 +175,7 @@ export default class Home extends React.Component {
               ]}
             />
             </View>
+<<<<<<< HEAD
           <Button style={{ marginTop: 10 }}
             full
             rounded
@@ -183,8 +186,27 @@ export default class Home extends React.Component {
           </Button>
 
         </View>
+=======
+            <Button style={{marginTop:10}}
+              full
+              rounded
+              success
+              onPress={() => navigate('Scan')}
+            >
+              <MaterialCommunityIcons style={{}} name="barcode-scan" size={30} color="white" />
+              <Text style={[styles.textField,{color:'white', marginLeft:8}]}>Scan</Text>
+            </Button>
+            <Button style={{ marginTop: 10 }}
+              full
+              rounded
+              success
+              onPress={() => this.logout()}
+            >
+              <Text style={[styles.textField,{color:'white'}]}>Logout</Text>
+            </Button>
+          </View>
+>>>>>>> 7345d059f1c2113431af1823ecf1097161062841
         </CollapsibleHeaderScrollView>
-
       </View>
 
     );
