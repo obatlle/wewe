@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     },
     feedContainer :{
       flex:1,
-      backgroundColor:'#F1F5F8',
+      backgroundColor: color.backgroundFeed,
       padding:10,
       paddingBottom:0,
       paddingTop:5,
@@ -34,8 +34,45 @@ const styles = StyleSheet.create({
     categoryText:{
       flex:1,
       fontFamily:'RobotoBold',
-      color:'#999999'
+      color: color.textDarkGrey
     },
+    newCategoryText:{
+      flex:1,
+      fontFamily:'RobotoBold',
+      color: color.textHighlightedRed,
+    },
+    navbarRightIcon:{
+      flex:1,
+      height:50,
+      alignItems:'center'
+    },
+    navbarLeftIcon:{
+      flex:1,
+      height:50,
+      alignItems:'center'
+    },
+    searchbarContainer:{
+      flex:4,
+      height:35,
+      backgroundColor: color.greyLight,
+      borderRadius:30,
+      alignSelf:'center',
+      flexDirection:'row'
+    },
+    searchbarSearchIcon:{
+      marginTop:8,
+      marginLeft:18
+    },
+    searchbarTextInput:{
+      height: 30,
+      flex:1,
+      color: color.textDarkGrey,
+      alignSelf:'center',
+      marginLeft:10
+    },
+    searchbarPlaceholderTextColor:{
+      color: color.textDarkGrey, 
+    }
 
 
 });

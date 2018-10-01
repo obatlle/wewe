@@ -9,7 +9,12 @@ const color = {
     light_grey: "#eaeaea",
     grey: "#ccc",
     red: "red",
-    underlayColor: "#ddd"
+    underlayColor: "#ddd",
+
+    backgroundFeed: '#F1F5F8',
+    textDarkGrey: '#9E9E9E',
+    textHighlightedRed: '#FF3F56',
+    greyLight: '#F0F0F0'
 }
 
 const fontSize = {

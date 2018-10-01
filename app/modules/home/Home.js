@@ -17,6 +17,7 @@ import { CollapsibleHeaderScrollView } from 'react-native-collapsible-header-vie
 
 
 
+
 export default class Home extends React.Component {
 
   componentDidMount(){
@@ -30,7 +31,7 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: 'Search on Wewe',
+      search: '',
     };
   }
 
@@ -67,28 +68,30 @@ export default class Home extends React.Component {
           CollapsibleHeaderComponent={
             <View>
               <View style={styles.searchBar}>
-                <View style={{flex:1,height:50, alignItems:'center'}}>
+                <View style={styles.navbarLeftIcon}>
                   <Image
                     style={{marginTop:10}}
                     source={require('../../assets/images/app_logo_thumbnail.png')}
                   />
                 </View>
-                <View style={{flex:4,height:35, backgroundColor:'#F0F0F0', borderRadius:30, alignSelf:'center', flexDirection:'row'}}>
-                  <Ionicons style={{marginTop:8, marginLeft:18}} name="ios-search" size={20} color="#9E9E9E" />
+                <View style={styles.searchbarContainer}>
+                  <Ionicons style={styles.searchbarSearchIcon} name="ios-search" size={20} color="#9E9E9E" />
                   <TextInput
-                    style={{height: 30, flex:1, color:'#9E9E9E', alignSelf:'center',marginLeft:10}}
+                    style={styles.searchbarTextInput}
                     clearButtonMode={'while-editing'}
                     clearTextOnFocus={true}
                     onChangeText={(search) => this.setState({search})}
+                    placeholder={'Search on Wewe'}
+                    placeholderTextColor={styles.searchbarPlaceholderTextColor}
                     value={this.state.search}
                   />
                 </View>
-                <View style={{flex:1,height:50, alignItems:'center'}}>
+                <View style={styles.navbarRightIcon}>
                   <Ionicons style={{marginTop:10}} name="md-funnel" size={27} color="black" />
                 </View>
               </View>
               <View style={styles.categoryBar}>
-                <Text style={[styles.categoryText,{color:'#FF3F56'}]}>NEW!</Text>
+                <Text style={styles.newCategoryText}>NEW!</Text>
                 <Text style={styles.categoryText}>Food</Text>
                 <Text style={styles.categoryText}>Phones</Text>
                 <Text style={styles.categoryText}>Home</Text>
@@ -178,6 +181,7 @@ export default class Home extends React.Component {
           >
             <Text style={[styles.textField,{color:'white'}]}>Logout</Text>
           </Button>
+
         </View>
         </CollapsibleHeaderScrollView>
 
