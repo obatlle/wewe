@@ -50,12 +50,13 @@ class Scan extends React.Component {
   _handleBarCodeRead = data => {
     const { getProductInfo } = this.props;
     axios.get('https://world.openfoodfacts.org/api/v0/product/'+JSON.stringify(data.data)+'.json')
-    .then(response => {this.setState({loadedProductInfo:this.state.loadedProductInfo+1}),{getProductInfo}});
+    .then(response => {this.setState({loadedProductInfo:this.state.loadedProductInfo+1}),this.props.getProductInfo(response)});
   };
 
   componentDidUpdate(){
-    if (this.state.loadedProductInfo===1){
+    if (this.state.loadedProductInfo===1 && JSON.stringify(this.props.productInfo).length>10){
       const { navigate } = this.props.navigation;
+
       navigate('ProductDetail')
     }
   }
@@ -97,7 +98,7 @@ function mapDispatchToProps (dispatch) {
 
 function mapStateToProps (state) {
   return {
-    getProductInfo: state.productInfo,
+    productInfo: state.getProductInfo,
     //recipeCount: state.recipeCount,
     //highscore: state.highscore
   };

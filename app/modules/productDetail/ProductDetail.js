@@ -3,13 +3,17 @@ import { StyleSheet, Text, View , Alert, Dimensions} from 'react-native';
 
 import styles from "./styles";
 
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {ActionCreators} from '../../actions';
+
 import { Analytics, ScreenHit, Event } from 'expo-analytics';
 
 
 var {height, width} = Dimensions.get('window');
 
 
-export default class ProductDetail extends React.Component {
+class ProductDetail extends React.Component {
 
   componentDidMount(){
     const analytics = new Analytics('UA-126042363-1');
@@ -19,12 +23,34 @@ export default class ProductDetail extends React.Component {
 
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      productInfo: JSON.stringify(this.props.productInfo),
+    };
+    console.log('YYYYYYYYYYYYYYYYY'+ JSON.parse(this.state.productInfo).data.code)
+  }
+
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Product detail</Text>
+        <Text>{JSON.parse(this.state.productInfo).data.product.product_name}</Text>
       </View>
     );
   }
 }
+
+
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators (ActionCreators, dispatch);
+}
+
+function mapStateToProps (state) {
+  return {
+        productInfo: state.getProductInfo,
+  };
+}
+
+export default connect (mapStateToProps, mapDispatchToProps) (ProductDetail);

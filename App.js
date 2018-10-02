@@ -1,19 +1,35 @@
 
 import React, { Component } from 'react';
 import { View, Text, StatusBar, TouchableOpacity} from 'react-native';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers,compose } from 'redux';
 import { Provider } from 'react-redux';
+import thunkMiddleware from 'redux-thunk';
 import thunk from 'redux-thunk';
+import promise from 'redux-promise';
+import {createLogger} from 'redux-logger';
 
 import { Font, AppLoading } from 'expo';
 
 
-import * as reducers from './app/reducers';
+import reducer from './app/reducers';
 import AppContainer from './AppContainer';
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-const reducer = combineReducers(reducers);
-const store = createStoreWithMiddleware(reducer);
+const loggerMiddleware = createLogger({predicate:(getState, action) => __DEV__});
+
+function configureStore (initialState) {
+  const enhancer = compose(
+    applyMiddleware (
+      thunkMiddleware,
+      loggerMiddleware,
+      thunk,
+      promise,
+    ),
+  );
+  return createStore(reducer, initialState, enhancer);
+}
+
+const store = configureStore ({});
+
 
 function cacheFonts(fonts) {
     return fonts.map(font => Font.loadAsync(font));
