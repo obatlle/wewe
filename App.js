@@ -9,7 +9,7 @@ import { Font, AppLoading } from 'expo';
 
 
 import * as reducers from './app/reducers';
-import RootStackNavigator from './app/modules/RootStackNavigator';
+import AppContainer from './AppContainer';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const reducer = combineReducers(reducers);
@@ -56,7 +56,7 @@ export default class Index extends Component {
       <View
        style={{flex:1}}>
       <Provider store={store}>
-        <RootStackNavigator/>
+        <AppContainer/>
       </Provider>
       </View>);
   }
