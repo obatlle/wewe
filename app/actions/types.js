@@ -1,1 +1,1 @@
-export const GET_SCREEN='GET_SCREEN'
+export const GET_PRODUCT_INFO='GET_PRODUCT_INFO'

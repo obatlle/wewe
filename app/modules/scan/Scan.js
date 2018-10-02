@@ -8,10 +8,14 @@ import { Analytics, ScreenHit, Event } from 'expo-analytics';
 
 import axios from 'axios';
 
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {ActionCreators} from '../../actions';
+
 var {height, width} = Dimensions.get('window');
 
 
-export default class Scan extends React.Component {
+class Scan extends React.Component {
 
 
 
@@ -29,7 +33,8 @@ export default class Scan extends React.Component {
     super(props);
     this.state = {
           loadedProductInfo:0,
-          hasCameraPermission: null
+          hasCameraPermission: null,
+          productInfo: null
     };
   }
 
@@ -41,8 +46,9 @@ export default class Scan extends React.Component {
   };
 
   _handleBarCodeRead = data => {
+    const { getProductInfo } = this.props;
     axios.get('https://world.openfoodfacts.org/api/v0/product/'+JSON.stringify(data.data)+'.json')
-    .then(response => {this.setState({loadedProductInfo:this.state.loadedProductInfo+1})});
+    .then(response => {this.setState({loadedProductInfo:this.state.loadedProductInfo+1}),{getProductInfo}});
   };
 
   componentDidUpdate(){
@@ -78,3 +84,17 @@ export default class Scan extends React.Component {
     );
   }
 }
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators (ActionCreators, dispatch);
+}
+
+function mapStateToProps (state) {
+  return {
+    getProductInfo: state.productInfo,
+    //recipeCount: state.recipeCount,
+    //highscore: state.highscore
+  };
+}
+
+export default connect (mapStateToProps, mapDispatchToProps) (Scan);

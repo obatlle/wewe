@@ -5,9 +5,9 @@ import {
 } from 'react-native'
 
 
-export function getScreen(screen){
+export function getProductInfo(productInfo){
   return {
-    type: types.GET_SCREEN,
-    screen,
+    type: types.GET_PRODUCT_INFO,
+    productInfo,
   }
 }
