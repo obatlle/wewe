@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View , Alert, Dimensions, Button} from 'react-native';
+import { StyleSheet, Text, View , Alert, Dimensions, Button, TouchableWithoutFeedback} from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
 
 import styles from "./styles";
@@ -7,6 +7,8 @@ import styles from "./styles";
 import { Analytics, ScreenHit, Event } from 'expo-analytics';
 
 import axios from 'axios';
+
+import { Ionicons } from '@expo/vector-icons';
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -69,11 +71,15 @@ class Scan extends React.Component {
           this.state.hasCameraPermission === false ?
             <Text>Camera permission is not granted</Text> :
             <View>
-              <Button onPress={() => goBack()} title="Go back" />
               <BarCodeScanner
                 onBarCodeRead={this._handleBarCodeRead}
-                style={{ height: height+1, width: width }}
-              />
+                style={{ height: height+1, width: width }}>
+                <View style={{marginTop:30,marginLeft:20, height:40, width:40}}>
+                  <TouchableWithoutFeedback style={{flex:1}} onPress={() => goBack()}>
+                    <Ionicons style={{}} name="ios-arrow-back" size={30} color="white" />
+                  </TouchableWithoutFeedback>
+                </View>
+              </BarCodeScanner>
               <View style={{width:width*0.8, height:height*0.3, position:'absolute', bottom:height*0.4, alignSelf:'center'}}>
                 <Text style={{alignSelf:'center', fontSize: 18, color:'white',fontFamily:'RobotoLight',marginBottom:12}}>Scan a product barcode</Text>
                 <View style={{borderColor:'white', borderRadius:10, borderWidth:2, width:width*0.8, flex:1, alignSelf:'center'}}/>
