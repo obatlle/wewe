@@ -7,6 +7,7 @@ import Auth from './auth/Auth';
 import Home from './home/Home';
 import Splash from './splash/Splash';
 import Scan from './scan/Scan';
+import ProductDetail from './productDetail/ProductDetail';
 
 const MainStack = StackNavigator(
   {
@@ -21,6 +22,9 @@ const MainStack = StackNavigator(
     },
     Scan: {
       screen: Scan,
+    },
+    ProductDetail: {
+      screen: ProductDetail,
     },
   },
   {

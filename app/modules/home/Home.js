@@ -175,18 +175,6 @@ export default class Home extends React.Component {
               ]}
             />
             </View>
-<<<<<<< HEAD
-          <Button style={{ marginTop: 10 }}
-            full
-            rounded
-            success
-            onPress={() => this.logout()}
-          >
-            <Text style={[styles.textField,{color:'white'}]}>Logout</Text>
-          </Button>
-
-        </View>
-=======
             <Button style={{marginTop:10}}
               full
               rounded
@@ -205,7 +193,6 @@ export default class Home extends React.Component {
               <Text style={[styles.textField,{color:'white'}]}>Logout</Text>
             </Button>
           </View>
->>>>>>> 7345d059f1c2113431af1823ecf1097161062841
         </CollapsibleHeaderScrollView>
       </View>
 
