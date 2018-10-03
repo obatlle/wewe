@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View , Alert, Dimensions} from 'react-native';
+import { StyleSheet, Text, View , Alert, Dimensions, Image} from 'react-native';
 
 import styles from "./styles";
 
@@ -35,6 +35,10 @@ class ProductDetail extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Image
+          style={styles.stretch}
+          source={{uri: JSON.parse(this.state.productInfo).data.product.image_front_url}}
+        />
         <Text>{JSON.parse(this.state.productInfo).data.product.product_name}</Text>
       </View>
     );
