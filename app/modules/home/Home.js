@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image,Platform, TextInput  } from 'react-native';
+import { StyleSheet, Text, View, Image,Platform, TextInput, Dimensions  } from 'react-native';
 
 import { Button } from 'native-base';
 
@@ -15,7 +15,7 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { CollapsibleHeaderScrollView } from 'react-native-collapsible-header-views';
 
-
+var {height, width} = Dimensions.get('window');
 
 
 export default class Home extends React.Component {
@@ -175,15 +175,7 @@ export default class Home extends React.Component {
               ]}
             />
             </View>
-            <Button style={{marginTop:10}}
-              full
-              rounded
-              success
-              onPress={() => navigate('Scan')}
-            >
-              <MaterialCommunityIcons style={{}} name="barcode-scan" size={30} color="white" />
-              <Text style={[styles.textField,{color:'white', marginLeft:8}]}>Scan</Text>
-            </Button>
+
             <Button style={{ marginTop: 10 }}
               full
               rounded
@@ -194,6 +186,15 @@ export default class Home extends React.Component {
             </Button>
           </View>
         </CollapsibleHeaderScrollView>
+        <Button style={{position:'absolute', bottom: 20, width:width*0.8, alignSelf:'center'}}
+          full
+          rounded
+          success
+          onPress={() => navigate('Scan')}
+        >
+          <MaterialCommunityIcons style={{}} name="barcode-scan" size={30} color="white" />
+          <Text style={[styles.textField,{color:'white', marginLeft:8}]}>Scan</Text>
+        </Button>
       </View>
 
     );
