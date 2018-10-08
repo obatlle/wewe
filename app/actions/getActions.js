@@ -11,3 +11,10 @@ export function getProductInfo(productInfo){
     productInfo,
   }
 }
+
+export function getUserUID(userUID){
+  return {
+    type: types.GET_USER_UID,
+    userUID,
+  }
+}

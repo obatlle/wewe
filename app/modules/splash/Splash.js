@@ -9,6 +9,10 @@ import styles from "./styles";
 
 import { Analytics, ScreenHit, Event } from 'expo-analytics';
 
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {ActionCreators} from '../../actions';
+
 // Initialize Firebase
 const firebaseConfig = {
     apiKey: c.FIREBASE_API_KEY,
@@ -26,7 +30,7 @@ import { Container, Content, Header, Form, Input, Item, Button, Label } from 'na
 
 
 
-export default class Splash extends React.Component {
+class Splash extends React.Component {
 
   constructor(props) {
     super(props)
@@ -39,6 +43,8 @@ export default class Splash extends React.Component {
   }
 
   componentDidMount() {
+    const { getUserUID } = this.props;
+
     const analytics = new Analytics('UA-126042363-1');
     analytics.hit(new ScreenHit('Splash'))
       .then(() => console.log("success"))
@@ -47,7 +53,8 @@ export default class Splash extends React.Component {
     firebase.auth().onAuthStateChanged((user) => {
       const { navigate } = this.props.navigation;
       if (user != null) {
-        console.log(user)
+        console.log(user.uid)
+        this.props.getUserUID(user.uid)
         this.setState({isLoggedIn:true});
         navigate('Home')
       } else {
@@ -69,3 +76,17 @@ export default class Splash extends React.Component {
     );
   }
 }
+
+
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators (ActionCreators, dispatch);
+}
+
+function mapStateToProps (state) {
+  return {
+        userUID: state.getUserUID,
+  };
+}
+
+export default connect (mapStateToProps, mapDispatchToProps) (Splash);

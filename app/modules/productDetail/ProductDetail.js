@@ -13,8 +13,11 @@ import { Button } from 'native-base';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+import * as firebase from 'firebase';
+
 
 var {height, width} = Dimensions.get('window');
+
 
 
 class ProductDetail extends React.Component {
@@ -27,12 +30,86 @@ class ProductDetail extends React.Component {
 
   }
 
+
+
   constructor(props) {
     super(props);
     this.state = {
       productInfo: JSON.stringify(this.props.productInfo).replace(/-/gi,''),
     };
+
+    //this.saveProduct();
+    this.readUserData();
   }
+
+
+
+  readUserData = () => {
+      const productInfo = JSON.parse(this.state.productInfo);
+      let product_exist=false;
+
+      let userID=this.props.userUID
+
+      var ref = firebase.database().ref('Scanned/'+userID+'/'+productInfo.data.code+'/');
+      var query = ref.orderByChild("image_url").equalTo(productInfo.data.product.image_front_url);
+      query.once("value", function(snapshot) {
+        snapshot.forEach(function(child) {
+        });
+        if(snapshot.val()==null){
+          /////////////////////////// Save Product
+          let score=50;
+          if (productInfo.data.product.nutriments.nutritionscorefr_100g === undefined){
+            score=50;
+          }else{
+            score=productInfo.data.product.nutriments.nutritionscorefr_100g;
+          }
+
+          let image_url=productInfo.data.product.image_front_url;
+          let score_color='';
+          let product_name=productInfo.data.product.product_name;
+
+          let product_brand='';
+
+          if (productInfo.data.product.brands === undefined){
+            product_brand='';
+          }else{
+            product_brand=productInfo.data.product.brands;
+          }
+
+          if (score>80){
+            score_color='darkgreen'
+          } else if(score>=60 && score<80){
+            score_color='green'
+          } else if (score>=40 && score<60){
+            score_color='yellow'
+          } else if (score>=20 && score<40){
+            score_color='oragne'
+          }else{
+            score_color='red'
+          }
+
+          firebase.database().ref('Scanned/'+userID+'/'+productInfo.data.code+'/').set({
+              score,
+              score_color,
+              image_url,
+              product_name,
+              product_brand
+          }).then((data)=>{
+              //success callback
+              console.log('data ' , data)
+          }).catch((error)=>{
+              //error callback
+              console.log('error ' , error)
+          })
+          ////////////////////////////
+        }else{
+          console.log('Product already exist')
+        }
+      });
+
+  }
+
+
 
 
   render() {
@@ -49,19 +126,20 @@ class ProductDetail extends React.Component {
     const proteins = productInfo.data.product.nutriments.proteins_100g
     const salt = productInfo.data.product.nutriments.salt_100g
     const score = productInfo.data.product.nutriments.nutritionscorefr_100g
-    //console.log("fat:"+JSON.stringify(productInfo.data.product.categories_hierarchy))
+    console.log("fat:"+JSON.stringify(productInfo.data.product))
     let category=''
-    if (productInfo.data.product.categories_hierarchy==undefined){
+    if (productInfo.data.product.categories_hierarchy === undefined){
       category=''
     } else {
       category=productInfo.data.product.categories_hierarchy[0].split(':')[1]
+
     }
 
     let fat_score=''
     let sugar_score=''
     let energy_score=''
     let salt_score=''
-    let protein_score=''
+    let proteins_score=''
     let fiber_score=''
     let fruits_score=''
 
@@ -325,6 +403,8 @@ class ProductDetail extends React.Component {
 
 
 
+
+
 function mapDispatchToProps (dispatch) {
   return bindActionCreators (ActionCreators, dispatch);
 }
@@ -332,6 +412,7 @@ function mapDispatchToProps (dispatch) {
 function mapStateToProps (state) {
   return {
         productInfo: state.getProductInfo,
+        userUID: state.getUserUID,
   };
 }
 
