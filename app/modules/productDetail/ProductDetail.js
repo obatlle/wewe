@@ -148,6 +148,8 @@ class ProductDetail extends React.Component {
     const salt = productInfo.data.product.nutriments.salt_100g
     const score = productInfo.data.product.nutriments.nutritionscorefr_100g
 
+    const additives= productInfo.data.product.additives_n
+
     let category=''
     if (productInfo.data.product.categories_hierarchy === undefined){
       category=''
@@ -175,6 +177,7 @@ class ProductDetail extends React.Component {
     let proteins_score=''
     let fiber_score=''
     let fruits_score=''
+    let additives_score=''
 
     if (category=='beverages'){
       if (salt>0.7){
@@ -232,6 +235,9 @@ class ProductDetail extends React.Component {
       fruits_score='good'
     }
 
+    if (additives>0) {
+      additives_score='bad'
+    }
 
 
     return (
@@ -298,7 +304,7 @@ class ProductDetail extends React.Component {
           </View>
         </View>
 
-        if(energy_score=='bad' | salt_score=='bad' | sugar_score=='bad' | fat_score=='bad' ){
+        if(energy_score=='bad' | salt_score=='bad' | sugar_score=='bad' | fat_score=='bad' | additives_score=='bad' ){
           <View style={{marginTop:35, height:50, width:width, backgroundColor:'#eaeaea', alignSelf:'center', flexDirection:'column'}}>
             <Text style={{fontSize:18, fontFamily:'RobotoRegular', fontWeight:'200', marginLeft:10, marginTop:14}}>Product defects</Text>
           </View>
@@ -337,6 +343,16 @@ class ProductDetail extends React.Component {
           <View>
             <View style={{ height:30, width:width, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
               <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Fat: {fat} g</Text>
+            </View>
+            <View style={{height:0.5, width:width, backgroundColor:'#F0F0F0'}}/>
+          </View>
+        ):(
+          <View/>
+        )}
+        {additives_score=='bad'?(
+          <View>
+            <View style={{ height:30, width:width, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
+              <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Additives: {additives}</Text>
             </View>
             <View style={{height:0.5, width:width, backgroundColor:'#F0F0F0'}}/>
           </View>
