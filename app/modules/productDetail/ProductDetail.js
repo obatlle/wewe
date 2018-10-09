@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View , Alert, Dimensions, Image} from 'react-native';
+import { StyleSheet, Text, View , Alert, Dimensions, Image, ScrollView} from 'react-native';
 
 import styles from "./styles";
 
@@ -51,7 +51,7 @@ class ProductDetail extends React.Component {
       let userID=this.props.userUID
 
       var ref = firebase.database().ref('Scanned/'+userID+'/'+productInfo.data.code+'/');
-      var query = ref.orderByChild("image_url").equalTo(productInfo.data.product.image_front_url);
+      var query = ref.orderByChild("code").equalTo(productInfo.data.code);
       query.once("value", function(snapshot) {
         snapshot.forEach(function(child) {
         });
@@ -64,7 +64,12 @@ class ProductDetail extends React.Component {
             score=productInfo.data.product.nutriments.nutritionscorefr_100g;
           }
 
-          let image_url=productInfo.data.product.image_front_url;
+          let image_url='';
+          if (productInfo.data.product.image_front_url=== undefined){
+            image_url='';
+          }else{
+            image_url=productInfo.data.product.image_front_url;
+          }
 
           let product_name='';
           if (productInfo.data.product.product_name === undefined){
@@ -79,6 +84,8 @@ class ProductDetail extends React.Component {
           }else{
             product_brand=productInfo.data.product.brands;
           }
+
+          let code=productInfo.data.code
 
           let score_color='';
           if (score>80){
@@ -98,7 +105,8 @@ class ProductDetail extends React.Component {
               score_color,
               image_url,
               product_name,
-              product_brand
+              product_brand,
+              code
           }).then((data)=>{
               //success callback
               console.log('data ' , data)
@@ -154,7 +162,11 @@ class ProductDetail extends React.Component {
     if (productInfo.data.product.categories_hierarchy === undefined){
       category=''
     } else {
-      category=productInfo.data.product.categories_hierarchy[0].split(':')[1]
+      if(productInfo.data.product.categories_hierarchy.length>0){
+        category=productInfo.data.product.categories_hierarchy[0].split(':')[1]
+      }else{
+        category=''
+      }
     }
 
     console.log('Category: '+category)
@@ -239,208 +251,245 @@ class ProductDetail extends React.Component {
       additives_score='bad'
     }
 
+    let has_bad=(energy_score=='bad' | salt_score=='bad' | sugar_score=='bad' | fat_score=='bad' | additives_score=='bad' )
+    let has_good=(energy_score=='good' | salt_score=='good' | sugar_score=='good' | fat_score=='good' | proteins_score=='good' | fiber_score=='good' | fruits_score=='good')
+
 
     return (
       <View style={styles.container}>
-        <View style={{flexDirection:'row', marginTop:40, marginLeft:20}}>
-          <Image
-            style={{width:100, resizeMode:'contain'}}
-            source={{uri: productInfo.data.product.image_front_url}}
-          />
-          <View style={{flexDirection:'column',marginLeft:20,}}>
-            <Text style={{fontSize:24, fontFamily:'RobotoBold'}}>{productInfo.data.product.product_name}</Text>
-            <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>{productInfo.data.product.brands}</Text>
-            <View style={{flexDirection:'row', marginTop: 20, alignItems:'center'}}>
-              {score>=80? (
-                <View style={{backgroundColor:'darkgreen', borderRadius:20, height:15, width:15, alignSelf:'center'}}></View>
-              ):(
-                <View>
-                  {score>=60 && score<80? (
-                    <View style={{backgroundColor:'green', borderRadius:20, height:15, width:15, alignSelf:'center'}}></View>
-                  ):(
-                    <View>
-                      {score>=40 && score<60? (
-                        <View style={{backgroundColor:'yellow', borderRadius:20, height:15, width:15, alignSelf:'center'}}></View>
-                      ):(
-                        <View>
-                          {score>=20 && score<40? (
-                            <View style={{backgroundColor:'orange', borderRadius:20, height:15, width:15, alignSelf:'center'}}></View>
-                          ):(
-                            <View style={{backgroundColor:'red', borderRadius:20, height:15, width:15, alignSelf:'center'}}></View>
-                          )}
-                        </View>
-                      )}
-                    </View>
-                  )}
-                </View>
-              )}
-              <View style={{marginLeft:10 ,flexDirection:'column'}}>
-                <Text style={{fontSize:18, fontFamily:'RobotoBold'}}>{score}/100</Text>
-                {score>=80? (
-                  <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>Exellent</Text>
-                ):(
-                  <View>
-                    {score>=60 && score<80? (
-                      <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>Good</Text>
+
+
+
+
+
+
+
+
+
+
+
+        <View style={{position:'absolute', bottom:0, width:width*0.95, height:height*0.9, alignSelf:'center', borderTopLeftRadius:15, borderTopRightRadius:15}}>
+          <View>
+            <Image style={{bottom:0, width:width*0.95, height:height*0.9+30, backgroundColor:'black', alignSelf:'center',overflow: 'hidden', borderRadius:15}} source={require('../../assets/images/background.png')}/>
+          </View>
+
+        </View>
+        <View  style={{position:'absolute', bottom:0, width:width*0.95, height:height*0.9, alignSelf:'center'}}>
+          <View style={{height:10}}>
+          </View>
+          <ScrollView>
+            <View style={{backgroundColor:'white', width:width*0.9, height:200, alignSelf:'center', borderRadius:10}}>
+              <View style={{flexDirection:'row', marginTop:40, marginLeft:20}}>
+                <Image
+                  style={{width:100, resizeMode:'contain'}}
+                  source={{uri: productInfo.data.product.image_front_url}}
+                />
+                <View style={{flexDirection:'column',marginLeft:20,}}>
+                  <Text style={{fontSize:24, fontFamily:'RobotoBold'}}>{productInfo.data.product.product_name}</Text>
+                  <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>{productInfo.data.product.brands}</Text>
+                  <View style={{flexDirection:'row', marginTop: 20, alignItems:'center'}}>
+                    {score>=80? (
+                      <View style={{backgroundColor:'darkgreen', borderRadius:20, height:15, width:15, alignSelf:'center'}}></View>
                     ):(
                       <View>
-                        {score>=40 && score<60? (
-                          <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>Regular</Text>
+                        {score>=60 && score<80? (
+                          <View style={{backgroundColor:'green', borderRadius:20, height:15, width:15, alignSelf:'center'}}></View>
                         ):(
                           <View>
-                            {score>=20 && score<40? (
-                              <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>Poor</Text>
+                            {score>=40 && score<60? (
+                              <View style={{backgroundColor:'yellow', borderRadius:20, height:15, width:15, alignSelf:'center'}}></View>
                             ):(
-                              <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>Bad</Text>
+                              <View>
+                                {score>=20 && score<40? (
+                                  <View style={{backgroundColor:'orange', borderRadius:20, height:15, width:15, alignSelf:'center'}}></View>
+                                ):(
+                                  <View style={{backgroundColor:'red', borderRadius:20, height:15, width:15, alignSelf:'center'}}></View>
+                                )}
+                              </View>
                             )}
                           </View>
                         )}
                       </View>
                     )}
+                    <View style={{marginLeft:10 ,flexDirection:'column'}}>
+                      <Text style={{fontSize:18, fontFamily:'RobotoBold'}}>{score}/100</Text>
+                      {score>=80? (
+                        <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>Exellent</Text>
+                      ):(
+                        <View>
+                          {score>=60 && score<80? (
+                            <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>Good</Text>
+                          ):(
+                            <View>
+                              {score>=40 && score<60? (
+                                <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>Regular</Text>
+                              ):(
+                                <View>
+                                  {score>=20 && score<40? (
+                                    <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>Poor</Text>
+                                  ):(
+                                    <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>Bad</Text>
+                                  )}
+                                </View>
+                              )}
+                            </View>
+                          )}
+                        </View>
+                      )}
+                    </View>
                   </View>
-                )}
+                </View>
               </View>
             </View>
-          </View>
+
+
+            {has_bad>0?(
+            <View style={{backgroundColor:'white', width:width*0.9, height:300, alignSelf:'center', borderRadius:10, marginTop:20}}>
+              <View style={{ height:50, width:width*0.9, backgroundColor:'#eaeaea', alignSelf:'center', flexDirection:'column', borderTopLeftRadius:10, borderTopRightRadius:10}}>
+                <Text style={{fontSize:18, fontFamily:'RobotoRegular', fontWeight:'200', marginLeft:10, marginTop:14}}>Product benefits</Text>
+              </View>
+              {energy_score=='bad'?(
+                <View>
+                  <View style={{height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
+                    <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Energy: {energy} kCal</Text>
+                  </View>
+                  <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
+                </View>
+              ):(
+                <View/>
+              )}
+              {salt_score=='bad'?(
+                <View>
+                  <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
+                    <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Salt: {salt} g</Text>
+                  </View>
+                  <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
+                </View>
+              ):(
+                <View/>
+              )}
+              {sugar_score=='bad'?(
+                <View>
+                  <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
+                    <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Sugar: {sugar} g</Text>
+                  </View>
+                  <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
+                </View>
+              ):(
+                <View/>
+              )}
+              {fat_score=='bad'?(
+                <View>
+                  <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
+                    <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Fat: {fat} g</Text>
+                  </View>
+                  <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
+                </View>
+              ):(
+                <View/>
+              )}
+              {additives_score=='bad'?(
+                <View>
+                  <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
+                    <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Additives: {additives}</Text>
+                  </View>
+                  <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
+                </View>
+              ):(
+                <View/>
+              )}
+            </View>
+            ):(
+              <View/>
+            )}
+
+
+            {has_good>0?(
+            <View style={{backgroundColor:'white', width:width*0.9, height:300, alignSelf:'center', borderRadius:10, marginTop:10}}>
+              <View style={{ height:50, width:width*0.9, backgroundColor:'#eaeaea', alignSelf:'center', flexDirection:'column', borderTopLeftRadius:10, borderTopRightRadius:10}}>
+                <Text style={{fontSize:18, fontFamily:'RobotoRegular', fontWeight:'200', marginLeft:10, marginTop:14}}>Product benefits</Text>
+              </View>
+              {energy_score=='good'?(
+                <View>
+                  <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
+                    <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Energy: {energy} kCal</Text>
+                  </View>
+                  <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
+                </View>
+              ):(
+                <View/>
+              )}
+              {salt_score=='good'?(
+                <View>
+                  <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
+                    <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Salt: {salt} g</Text>
+                  </View>
+                  <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
+                </View>
+              ):(
+                <View/>
+              )}
+              {sugar_score=='good'?(
+                <View>
+                  <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
+                    <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Sugar: {sugar} g</Text>
+                  </View>
+                  <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
+                </View>
+              ):(
+                <View/>
+              )}
+              {fat_score=='good'?(
+                <View>
+                  <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
+                    <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Fat: {fat} g</Text>
+                  </View>
+                  <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
+                </View>
+              ):(
+                <View/>
+              )}
+              {proteins_score=='good'?(
+                <View>
+                  <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
+                    <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Proteins: {proteins} g</Text>
+                  </View>
+                  <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
+                </View>
+              ):(
+                <View/>
+              )}
+              {fiber_score=='good'?(
+                <View>
+                  <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
+                    <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Fiber: {fiber} g</Text>
+                  </View>
+                  <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
+                </View>
+              ):(
+                <View/>
+              )}
+              {fruits_score=='good'?(
+                <View>
+                  <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
+                    <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Fruits: {fruits} %</Text>
+                  </View>
+                  <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
+                </View>
+              ):(
+                <View/>
+              )}
+            </View>
+          ):(
+            <View/>
+          )}
+          </ScrollView>
         </View>
-
-        if(energy_score=='bad' | salt_score=='bad' | sugar_score=='bad' | fat_score=='bad' | additives_score=='bad' ){
-          <View style={{marginTop:35, height:50, width:width, backgroundColor:'#eaeaea', alignSelf:'center', flexDirection:'column'}}>
-            <Text style={{fontSize:18, fontFamily:'RobotoRegular', fontWeight:'200', marginLeft:10, marginTop:14}}>Product defects</Text>
-          </View>
-        }
-        {energy_score=='bad'?(
-          <View>
-            <View style={{height:30, width:width, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
-              <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Energy: {energy} kCal</Text>
-            </View>
-            <View style={{height:0.5, width:width, backgroundColor:'#F0F0F0'}}/>
-          </View>
-        ):(
-          <View/>
-        )}
-        {salt_score=='bad'?(
-          <View>
-            <View style={{ height:30, width:width, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
-              <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Salt: {salt} g</Text>
-            </View>
-            <View style={{height:0.5, width:width, backgroundColor:'#F0F0F0'}}/>
-          </View>
-        ):(
-          <View/>
-        )}
-        {sugar_score=='bad'?(
-          <View>
-            <View style={{ height:30, width:width, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
-              <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Sugar: {sugar} g</Text>
-            </View>
-            <View style={{height:0.5, width:width, backgroundColor:'#F0F0F0'}}/>
-          </View>
-        ):(
-          <View/>
-        )}
-        {fat_score=='bad'?(
-          <View>
-            <View style={{ height:30, width:width, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
-              <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Fat: {fat} g</Text>
-            </View>
-            <View style={{height:0.5, width:width, backgroundColor:'#F0F0F0'}}/>
-          </View>
-        ):(
-          <View/>
-        )}
-        {additives_score=='bad'?(
-          <View>
-            <View style={{ height:30, width:width, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
-              <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Additives: {additives}</Text>
-            </View>
-            <View style={{height:0.5, width:width, backgroundColor:'#F0F0F0'}}/>
-          </View>
-        ):(
-          <View/>
-        )}
-
-        if(energy_score=='good' | salt_score=='good' | sugar_score=='good' | fat_score=='good' | proteins_score='good' | fiber_soce=='good' | fruits_score=='good' ){
-          <View style={{marginTop:25, height:50, width:width, backgroundColor:'#eaeaea', alignSelf:'center', flexDirection:'column'}}>
-            <Text style={{fontSize:18, fontFamily:'RobotoRegular', fontWeight:'200', marginLeft:10, marginTop:14}}>Product benefits</Text>
-          </View>
-        }
-        {energy_score=='good'?(
-          <View>
-            <View style={{ height:30, width:width, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
-              <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Energy: {energy} kCal</Text>
-            </View>
-            <View style={{height:0.5, width:width, backgroundColor:'#F0F0F0'}}/>
-          </View>
-        ):(
-          <View/>
-        )}
-        {salt_score=='good'?(
-          <View>
-            <View style={{ height:30, width:width, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
-              <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Salt: {salt} g</Text>
-            </View>
-            <View style={{height:0.5, width:width, backgroundColor:'#F0F0F0'}}/>
-          </View>
-        ):(
-          <View/>
-        )}
-        {sugar_score=='good'?(
-          <View>
-            <View style={{ height:30, width:width, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
-              <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Sugar: {sugar} g</Text>
-            </View>
-            <View style={{height:0.5, width:width, backgroundColor:'#F0F0F0'}}/>
-          </View>
-        ):(
-          <View/>
-        )}
-        {fat_score=='good'?(
-          <View>
-            <View style={{ height:30, width:width, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
-              <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Fat: {fat} g</Text>
-            </View>
-            <View style={{height:0.5, width:width, backgroundColor:'#F0F0F0'}}/>
-          </View>
-        ):(
-          <View/>
-        )}
-        {proteins_score=='good'?(
-          <View>
-            <View style={{ height:30, width:width, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
-              <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Proteins: {proteins} g</Text>
-            </View>
-            <View style={{height:0.5, width:width, backgroundColor:'#F0F0F0'}}/>
-          </View>
-        ):(
-          <View/>
-        )}
-        {fiber_score=='good'?(
-          <View>
-            <View style={{ height:30, width:width, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
-              <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Fiber: {fiber} g</Text>
-            </View>
-            <View style={{height:0.5, width:width, backgroundColor:'#F0F0F0'}}/>
-          </View>
-        ):(
-          <View/>
-        )}
-        {fruits_score=='good'?(
-          <View>
-            <View style={{ height:30, width:width, backgroundColor:'white', alignSelf:'center', flexDirection:'column'}}>
-              <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Fruits: {fruits} %</Text>
-            </View>
-            <View style={{height:0.5, width:width, backgroundColor:'#F0F0F0'}}/>
-          </View>
-        ):(
-          <View/>
-        )}
-
         <Button style={{position:'absolute', bottom: 20, width:width*0.8, alignSelf:'center'}}
           full
           rounded
           success
-          onPress={() => navigate('Scan')}
+          onPress={() => {navigate('Scan')}}
         >
           <MaterialCommunityIcons style={{}} name="barcode-scan" size={30} color="white" />
           <Text style={[styles.textField,{color:'white', marginLeft:8}]}>Scan</Text>
