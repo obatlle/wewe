@@ -65,17 +65,22 @@ class ProductDetail extends React.Component {
           }
 
           let image_url=productInfo.data.product.image_front_url;
-          let score_color='';
-          let product_name=productInfo.data.product.product_name;
+
+          let product_name='';
+          if (productInfo.data.product.product_name === undefined){
+            product_name='';
+          }else{
+            product_name=productInfo.data.product.product_name;
+          }
 
           let product_brand='';
-
           if (productInfo.data.product.brands === undefined){
             product_brand='';
           }else{
             product_brand=productInfo.data.product.brands;
           }
 
+          let score_color='';
           if (score>80){
             score_color='darkgreen'
           } else if(score>=60 && score<80){
@@ -83,7 +88,7 @@ class ProductDetail extends React.Component {
           } else if (score>=40 && score<60){
             score_color='yellow'
           } else if (score>=20 && score<40){
-            score_color='oragne'
+            score_color='orange'
           }else{
             score_color='red'
           }
@@ -110,30 +115,58 @@ class ProductDetail extends React.Component {
   }
 
 
-
-
   render() {
     const { navigate } = this.props.navigation;
 
     const productInfo = JSON.parse(this.state.productInfo);
 
-    const energy = productInfo.data.product.nutriments.energy_100g*0.239006
-    const fat = productInfo.data.product.nutriments.saturatedfat_100g
-    const sugar = productInfo.data.product.nutriments.sugars_100g
+    let energy=undefined
+    if (productInfo.data.product.nutriments.energy_unit=='kcal'){
+      energy = productInfo.data.product.nutriments.energy_100g
+    }else{
+      energy = productInfo.data.product.nutriments.energy_100g*0.239006
+    }
+
+    let fat = ''
+    if(productInfo.data.product.nutriments.saturatedfat_100g===undefined){
+      fat=0
+    }else{
+      fat = productInfo.data.product.nutriments.saturatedfat_100g
+    }
+
+    let sugar = ''
+    if(productInfo.data.product.nutriments.sugars_100g===undefined){
+      sugar=0
+    }else{
+      sugar = productInfo.data.product.nutriments.sugars_100g
+    }
+
     const sodium = productInfo.data.product.nutriments.sodium_100g
     const fruits = productInfo.data.product.nutriments.fruitsvegetablesnuts_100g_estimate
     const fiber = productInfo.data.product.nutriments.fiber_100g
     const proteins = productInfo.data.product.nutriments.proteins_100g
     const salt = productInfo.data.product.nutriments.salt_100g
     const score = productInfo.data.product.nutriments.nutritionscorefr_100g
-    console.log("fat:"+JSON.stringify(productInfo.data.product))
+
     let category=''
     if (productInfo.data.product.categories_hierarchy === undefined){
       category=''
     } else {
       category=productInfo.data.product.categories_hierarchy[0].split(':')[1]
-
     }
+
+    console.log('Category: '+category)
+    console.log('Score: '+score)
+    console.log('Energy: '+energy)
+    console.log('Fat: '+fat)
+    console.log('Sugar: '+sugar)
+    console.log('Fruits: '+fruits)
+    console.log('Fiber: '+fiber)
+    console.log('Proteins: '+proteins)
+    console.log('Salt: '+salt)
+    console.log('------------------------------')
+    console.log('Nutriments: '+JSON.stringify(productInfo.data.product.nutriments))
+
 
     let fat_score=''
     let sugar_score=''
