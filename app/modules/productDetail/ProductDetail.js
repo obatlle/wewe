@@ -257,53 +257,41 @@ class ProductDetail extends React.Component {
 
     return (
       <View style={styles.container}>
-
-
-
-
-
-
-
-
-
-
-
-        <View style={{position:'absolute', bottom:0, width:width*0.95, height:height*0.9, alignSelf:'center', borderTopLeftRadius:15, borderTopRightRadius:15}}>
+        <View style={styles.cardContianer}>
           <View>
-            <Image style={{bottom:0, width:width*0.95, height:height*0.9+30, backgroundColor:'black', alignSelf:'center',overflow: 'hidden', borderRadius:15}} source={require('../../assets/images/background.png')}/>
+            <Image style={styles.backgroundCardImage} source={require('../../assets/images/background.png')}/>
           </View>
-
         </View>
-        <View  style={{position:'absolute', bottom:0, width:width*0.95, height:height*0.9, alignSelf:'center'}}>
+        <View  style={styles.productInfoContainer}>
           <View style={{height:10}}>
           </View>
           <ScrollView>
-            <View style={{backgroundColor:'white', width:width*0.9, height:200, alignSelf:'center', borderRadius:10}}>
-              <View style={{flexDirection:'row', marginTop:40, marginLeft:20}}>
+            <View style={styles.generalProductInfo}>
+              <View style={styles.productImageContainer}>
                 <Image
-                  style={{width:100, resizeMode:'contain'}}
+                  style={styles.productImage}
                   source={{uri: productInfo.data.product.image_front_url}}
                 />
-                <View style={{flexDirection:'column',marginLeft:20,}}>
-                  <Text style={{fontSize:24, fontFamily:'RobotoBold'}}>{productInfo.data.product.product_name}</Text>
-                  <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>{productInfo.data.product.brands}</Text>
-                  <View style={{flexDirection:'row', marginTop: 20, alignItems:'center'}}>
+                <View style={styles.productNameContainer}>
+                  <Text style={styles.productName}>{productInfo.data.product.product_name}</Text>
+                  <Text style={styles.productBrand}>{productInfo.data.product.brands}</Text>
+                  <View style={style.productScoreContainer}>
                     {score>=80? (
-                      <View style={{backgroundColor:'darkgreen', borderRadius:20, height:15, width:15, alignSelf:'center'}}></View>
+                      <View style={[styles.productScore,styles.productScoreExcellent]}></View>
                     ):(
                       <View>
                         {score>=60 && score<80? (
-                          <View style={{backgroundColor:'green', borderRadius:20, height:15, width:15, alignSelf:'center'}}></View>
+                          <View style={[styles.productScore, styles.productScoreGood]}></View>
                         ):(
                           <View>
                             {score>=40 && score<60? (
-                              <View style={{backgroundColor:'yellow', borderRadius:20, height:15, width:15, alignSelf:'center'}}></View>
+                              <View style={[styles.productScore, styles.productScoreMedium]}></View>
                             ):(
                               <View>
                                 {score>=20 && score<40? (
-                                  <View style={{backgroundColor:'orange', borderRadius:20, height:15, width:15, alignSelf:'center'}}></View>
+                                  <View style={[styles.productScore, styles.productScoreRegular]}></View>
                                 ):(
-                                  <View style={{backgroundColor:'red', borderRadius:20, height:15, width:15, alignSelf:'center'}}></View>
+                                  <View style={[styles.productScore, styles.productScoreBad]}></View>
                                 )}
                               </View>
                             )}
@@ -312,23 +300,23 @@ class ProductDetail extends React.Component {
                       </View>
                     )}
                     <View style={{marginLeft:10 ,flexDirection:'column'}}>
-                      <Text style={{fontSize:18, fontFamily:'RobotoBold'}}>{score}/100</Text>
+                      <Text style={styles.productScoreValue}>{score}/100</Text>
                       {score>=80? (
-                        <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>Exellent</Text>
+                        <Text style={styles.productScoreText}>Exellent</Text>
                       ):(
                         <View>
                           {score>=60 && score<80? (
-                            <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>Good</Text>
+                            <Text style={styles.productScoreText}>Good</Text>
                           ):(
                             <View>
                               {score>=40 && score<60? (
-                                <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>Regular</Text>
+                                <Text style={styles.productScoreText}>Regular</Text>
                               ):(
                                 <View>
                                   {score>=20 && score<40? (
-                                    <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>Poor</Text>
+                                    <Text style={styles.productScoreText}>Poor</Text>
                                   ):(
-                                    <Text style={{fontSize:16, fontFamily:'RobotoLight', color:'#9E9E9E'}}>Bad</Text>
+                                    <Text style={styles.productScoreText}>Bad</Text>
                                   )}
                                 </View>
                               )}
@@ -344,9 +332,9 @@ class ProductDetail extends React.Component {
 
 
             {has_bad>0?(
-            <View style={{backgroundColor:'white', width:width*0.9, height:300, alignSelf:'center', borderRadius:10, marginTop:20}}>
-              <View style={{ height:50, width:width*0.9, backgroundColor:'#eaeaea', alignSelf:'center', flexDirection:'column', borderTopLeftRadius:10, borderTopRightRadius:10}}>
-                <Text style={{fontSize:18, fontFamily:'RobotoRegular', fontWeight:'200', marginLeft:10, marginTop:14}}>Product benefits</Text>
+            <View style={[styles.productCardContainer,{height:300}]}>
+              <View style={styles.productCardTitle}>
+                <Text style={styles.productCardTitleText}>Product benefits</Text>
               </View>
               {energy_score=='bad'?(
                 <View>
@@ -405,9 +393,9 @@ class ProductDetail extends React.Component {
 
 
             {has_good>0?(
-            <View style={{backgroundColor:'white', width:width*0.9, height:300, alignSelf:'center', borderRadius:10, marginTop:10}}>
-              <View style={{ height:50, width:width*0.9, backgroundColor:'#eaeaea', alignSelf:'center', flexDirection:'column', borderTopLeftRadius:10, borderTopRightRadius:10}}>
-                <Text style={{fontSize:18, fontFamily:'RobotoRegular', fontWeight:'200', marginLeft:10, marginTop:14}}>Product benefits</Text>
+            <View style={[styles.goodProductCardContainer,{height:300}]}>
+              <View style={styles.productCardTitle}>
+                <Text style={styles.productCardTitleText}>Product benefits</Text>
               </View>
               {energy_score=='good'?(
                 <View>
@@ -485,14 +473,14 @@ class ProductDetail extends React.Component {
           )}
           </ScrollView>
         </View>
-        <Button style={{position:'absolute', bottom: 20, width:width*0.8, alignSelf:'center'}}
+        <Button style={styles.scanButton}
           full
           rounded
           success
           onPress={() => {navigate('Scan')}}
         >
           <MaterialCommunityIcons style={{}} name="barcode-scan" size={30} color="white" />
-          <Text style={[styles.textField,{color:'white', marginLeft:8}]}>Scan</Text>
+          <Text style={[styles.textField,styles.scanButtonText]}>Scan</Text>
         </Button>
       </View>
     );

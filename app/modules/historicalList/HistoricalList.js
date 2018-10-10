@@ -29,7 +29,12 @@ class HistoricalList extends React.Component {
       var items = [];
       snap.forEach((child) => {
         items.push({
-          title: child.val().title,
+          code: child.val().code,
+          image_url: child.val().image_url,
+          product_brand: child.val().product_brand,
+          product_name: child.val().product_name,
+          score: child.val().score,
+          score_color: child.val().score_color,
           _key: child.key
         });
       });
@@ -58,6 +63,7 @@ class HistoricalList extends React.Component {
       })
     };
     this.itemsRef = firebase.database().ref('Scanned/'+this.props.userUID+'/');
+    console.log('YYYYYYYYYY'+this.itemsRef)
   }
 
   _renderItem(item) {
@@ -66,7 +72,7 @@ class HistoricalList extends React.Component {
     };
 
     return (
-      <ListItem item="{item}" onpress="{onPress}"/>
+      <ListItem item={item} onpress={onPress}/>
     );
   }
 
@@ -78,7 +84,9 @@ class HistoricalList extends React.Component {
 
     return (
       <View style={styles.container}>
-        <ListView dataSource={this.state.dataSource} renderRow={this._renderItem.bind(this)}/>
+        <ListView dataSource={this.state.dataSource}
+          renderRow={this._renderItem.bind(this)}
+          enableEmptySections={true}/>
       </View>
     );
   }

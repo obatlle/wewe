@@ -9,7 +9,7 @@ class ListItem extends Component {
     return (
       <TouchableHighlight onPress={this.props.onPress}>
         <View>
-          <Text>{this.props.item}</Text>
+          <Text>{this.props.item.code}</Text>
         </View>
       </TouchableHighlight>
     );

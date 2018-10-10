@@ -14,7 +14,13 @@ const color = {
     backgroundFeed: '#F1F5F8',
     textDarkGrey: '#9E9E9E',
     textHighlightedRed: '#FF3F56',
-    greyLight: '#F0F0F0'
+    greyLight: '#F0F0F0',
+    scoreExcellent:'darkgreen',
+    scoreGood:'green',
+    scoreMedium:'yellow',
+    scoreRegular:'orange',
+    scoreBad:'red',
+    backgroundCard: 'white'
 }
 
 const fontSize = {
