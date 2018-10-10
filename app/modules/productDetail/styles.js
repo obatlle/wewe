@@ -14,16 +14,16 @@ const styles = StyleSheet.create({
   cardContianer:{
     position:'absolute',
     bottom:0,
-    width:width*0.95,
-    height:height*0.9,
+    width:width*0.98,
+    height:height*0.95,
     alignSelf:'center',
     borderTopLeftRadius:15,
     borderTopRightRadius:15
   },
   backgroundCardImage:{
     bottom:0,
-    width:width*0.95,
-    height:height*0.9+30,
+    width:width*0.98,
+    height:height*0.95+30,
     backgroundColor:'black',
     alignSelf:'center',
     overflow: 'hidden',
@@ -32,13 +32,14 @@ const styles = StyleSheet.create({
   productInfoContainer:{
     position:'absolute',
     bottom:0,
-    width:width*0.95,
-    height:height*0.9,
-    alignSelf:'center'
+    width:width*0.98,
+    height:height*0.95,
+    alignSelf:'center',
+    marginLeft:10
   },
   generalProductInfo:{
     backgroundColor:'white',
-    width:width*0.9,
+    width:width*0.95,
     height:200,
     alignSelf:'center',
     borderRadius:10
@@ -102,14 +103,14 @@ const styles = StyleSheet.create({
   },
   productCardContainer:{
     backgroundColor:color.backgroundCard,
-    width:width*0.9,
+    width:width*0.95,
     alignSelf:'center',
     borderRadius:10,
     marginTop:20
   },
   productCardTitle:{
     height:50,
-    width:width*0.9,
+    width:width*0.95,
     backgroundColor:color.greyLight,
     alignSelf:'center',
     flexDirection:'column',

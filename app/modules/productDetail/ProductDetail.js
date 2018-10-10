@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View , Alert, Dimensions, Image, ScrollView} from 'react-native';
+import { StyleSheet, Text, View , Alert, Dimensions, Image, ScrollView, TouchableOpacity} from 'react-native';
 
 import styles from "./styles";
 
@@ -254,16 +254,26 @@ class ProductDetail extends React.Component {
     let has_bad=(energy_score=='bad' | salt_score=='bad' | sugar_score=='bad' | fat_score=='bad' | additives_score=='bad' )
     let has_good=(energy_score=='good' | salt_score=='good' | sugar_score=='good' | fat_score=='good' | proteins_score=='good' | fiber_score=='good' | fruits_score=='good')
 
+    const { goBack } = this.props.navigation;
 
     return (
       <View style={styles.container}>
+
         <View style={styles.cardContianer}>
           <View>
             <Image style={styles.backgroundCardImage} source={require('../../assets/images/background.png')}/>
           </View>
         </View>
         <View  style={styles.productInfoContainer}>
-          <View style={{height:10}}>
+          <View style={{height:60, flexDirection:'row'}}>
+            <TouchableOpacity style={{height:100,width:100}} onPress={() => goBack()}>
+              <View style={{height:100,width:100}} >
+                  <MaterialCommunityIcons style={{marginTop:15,marginLeft:15}} name="close" size={30} color="white" />
+                </View>
+            </TouchableOpacity>
+            <View style={{flex:1}}>
+              <Text style={{fontFamily:'RobotoBold', fontWeight:'400', fontSize:20, color:'white', marginTop:15, marginLeft:-85, textAlign:'center'}}>Product Detail</Text>
+            </View>
           </View>
           <ScrollView>
             <View style={styles.generalProductInfo}>
@@ -275,7 +285,7 @@ class ProductDetail extends React.Component {
                 <View style={styles.productNameContainer}>
                   <Text style={styles.productName}>{productInfo.data.product.product_name}</Text>
                   <Text style={styles.productBrand}>{productInfo.data.product.brands}</Text>
-                  <View style={style.productScoreContainer}>
+                  <View style={styles.productScoreContainer}>
                     {score>=80? (
                       <View style={[styles.productScore,styles.productScoreExcellent]}></View>
                     ):(
@@ -393,7 +403,7 @@ class ProductDetail extends React.Component {
 
 
             {has_good>0?(
-            <View style={[styles.goodProductCardContainer,{height:300}]}>
+            <View style={[styles.productCardContainer,{height:300}]}>
               <View style={styles.productCardTitle}>
                 <Text style={styles.productCardTitleText}>Product benefits</Text>
               </View>
