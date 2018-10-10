@@ -175,6 +175,14 @@ export default class Home extends React.Component {
               ]}
             />
             </View>
+            <Button style={{ marginTop: 10 }}
+              full
+              rounded
+              success
+              onPress={() => navigate('HistoricalList')}
+            >
+              <Text style={[styles.textField,{color:'white'}]}>Historical Product List</Text>
+            </Button>
 
             <Button style={{ marginTop: 10 }}
               full

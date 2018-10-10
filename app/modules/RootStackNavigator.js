@@ -8,6 +8,7 @@ import Home from './home/Home';
 import Splash from './splash/Splash';
 import Scan from './scan/Scan';
 import ProductDetail from './productDetail/ProductDetail';
+import HistoricalList from './historicalList/HistoricalList';
 
 const MainStack = StackNavigator(
   {
@@ -25,6 +26,9 @@ const MainStack = StackNavigator(
     },
     ProductDetail: {
       screen: ProductDetail,
+    },
+    HistoricalList: {
+      screen: HistoricalList,
     },
   },
   {
