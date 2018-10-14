@@ -65,10 +65,11 @@ class HistoricalList extends React.Component {
         rowHasChanged: (row1, row2) => row1 !== row2,
       })
     };
-    this.itemsRef = firebase.database().ref('Scanned/'+this.props.userUID+'/').orderByChild("created_at");
+    this.itemsRef = firebase.database().ref('Scanned/'+this.props.userUID+'/');
   }
 
   _renderItem(item) {
+    console.log(item)
     const onPress = () => {
       let item_firebase_url=''+this.itemsRef.child(item.code)
       let code=item_firebase_url.split('/')[5]

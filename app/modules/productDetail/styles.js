@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   scanButton:{
     position:'absolute',
     bottom: 50,
-    width:width*0.8,
+    width:width*0.5,
     alignSelf:'center'
   },
   scanButtonText:{
