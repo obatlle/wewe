@@ -16,6 +16,8 @@ import {ActionCreators} from '../../actions';
 
 var {height, width} = Dimensions.get('window');
 
+const Tabbar = require('../Tabbar/tabbar');
+
 
 class Scan extends React.Component {
 
@@ -83,10 +85,17 @@ class Scan extends React.Component {
               </BarCodeScanner>
               <View style={{width:width*0.8, height:height*0.3, position:'absolute', bottom:height*0.4, alignSelf:'center'}}>
                 <Text style={{alignSelf:'center', fontSize: 18, color:'white',fontFamily:'RobotoLight',marginBottom:12}}>Scan a product barcode</Text>
-                <View style={{borderColor:'white', borderRadius:10, borderWidth:2, width:width*0.8, flex:1, alignSelf:'center'}}/>
+                <View style={{borderColor:'white', borderRadius:10, borderWidth:2, width:width*0.8, flex:1, alignSelf:'center'}}>
+                  <View style={{backgroundColor:'red', height:1.5, width:width*0.65, alignSelf:'center', marginTop: height*0.12}}>
+                  </View>
+                </View>
               </View>
             </View>
         }
+        <View style={{position:'absolute', bottom:0}} >
+          <Tabbar navigation={this.props.navigation}>
+          </Tabbar>
+        </View>
       </View>
     );
   }

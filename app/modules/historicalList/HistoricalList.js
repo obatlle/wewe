@@ -18,6 +18,7 @@ import * as firebase from 'firebase';
 var {height, width} = Dimensions.get('window');
 
 const ListItem = require('./ListItem');
+const Tabbar = require('../Tabbar/tabbar');
 
 
 class HistoricalList extends React.Component {
@@ -36,6 +37,7 @@ class HistoricalList extends React.Component {
           product_name: child.val().product_name,
           score: child.val().score,
           score_color: child.val().score_color,
+          created_at: child.val().created_at,
           _key: child.key
         });
       });
@@ -63,7 +65,7 @@ class HistoricalList extends React.Component {
         rowHasChanged: (row1, row2) => row1 !== row2,
       })
     };
-    this.itemsRef = firebase.database().ref('Scanned/'+this.props.userUID+'/');
+    this.itemsRef = firebase.database().ref('Scanned/'+this.props.userUID+'/').orderByChild("created_at");
   }
 
   _renderItem(item) {
@@ -104,10 +106,15 @@ class HistoricalList extends React.Component {
           <View style={{width:width*0.95, flex:1, alignSelf:'center'}}>
             <ListView dataSource={this.state.dataSource}
               renderRow={this._renderItem.bind(this)}
-              enableEmptySections={false}/>
+              />
           </View>
         </View>
+        <View style={{position:'absolute', bottom:0}} >
+          <Tabbar navigation={this.props.navigation}>
+          </Tabbar>
+        </View>
       </View>
+
     );
   }
 }

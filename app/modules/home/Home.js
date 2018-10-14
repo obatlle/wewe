@@ -17,6 +17,8 @@ import { CollapsibleHeaderScrollView } from 'react-native-collapsible-header-vie
 
 var {height, width} = Dimensions.get('window');
 
+const Tabbar = require('../Tabbar/tabbar');
+
 
 export default class Home extends React.Component {
 
@@ -194,7 +196,7 @@ export default class Home extends React.Component {
             </Button>
           </View>
         </CollapsibleHeaderScrollView>
-        <Button style={{position:'absolute', bottom: 20, width:width*0.8, alignSelf:'center'}}
+        <Button style={{position:'absolute', bottom: 50, width:width*0.5, alignSelf:'center', flexDirection:'row'}}
           full
           rounded
           success
@@ -202,7 +204,10 @@ export default class Home extends React.Component {
         >
           <MaterialCommunityIcons style={{}} name="barcode-scan" size={30} color="white" />
           <Text style={[styles.textField,{color:'white', marginLeft:8}]}>Scan</Text>
+
         </Button>
+        <Tabbar navigation={this.props.navigation}>
+        </Tabbar>
       </View>
 
     );

@@ -23,7 +23,7 @@ class ListItem extends Component {
             <View style={{flex:4, flexDirection:'column', marginTop:10, marginLeft:15}}>
               <Text style={{fontFamily:'RobotoBold', fontSize:18}}>{this.props.item.product_name}</Text>
               <Text>{this.props.item.product_brand}</Text>
-              <View style={{flexDirection:'row', marginTop:15}}>
+              <View style={{flexDirection:'row', marginTop:10}}>
                 <View style={{height:15, width:15, borderRadius:15, marginTop:1, backgroundColor:this.props.item.score_color}}/>
                 <Text style={{marginLeft:5}}>{this.props.item.code}</Text>
               </View>
