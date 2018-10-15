@@ -9,6 +9,7 @@ import Splash from './splash/Splash';
 import Scan from './scan/Scan';
 import ProductDetail from './productDetail/ProductDetail';
 import HistoricalList from './historicalList/HistoricalList';
+import Profile from './profile/Profile';
 
 const MainStack = StackNavigator(
   {
@@ -29,6 +30,9 @@ const MainStack = StackNavigator(
     },
     HistoricalList: {
       screen: HistoricalList,
+    },
+    Profile: {
+      screen: Profile,
     },
   },
   {

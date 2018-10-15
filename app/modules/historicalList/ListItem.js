@@ -6,10 +6,22 @@ import styles from "./styles";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const { View, TouchableHighlight, Text } = ReactNative;
+const  { color, padding, windowWidth, normalize, fontSize, fontFamily } = theme;
 
 
 class ListItem extends Component {
-
+  let score_name=''
+  if(this.props.item.score_color==color.scoreExcellent){
+    score_name='Excellent'
+  }else if(this.props.item.score_color==color.scoreGood){
+    score_name='Good'
+  }else if(this.props.item.score_color==color.scoreMedium){
+    score_name='Medium'
+  }else if(this.props.item.score_color==color.scoreRegular){
+    score_name='Regular'
+  }else if(this.props.item.score_color==color.scoreBad){
+    score_name='Bad'
+  }
 
   render() {
     return (
@@ -25,7 +37,7 @@ class ListItem extends Component {
               <Text>{this.props.item.product_brand}</Text>
               <View style={{flexDirection:'row', marginTop:10}}>
                 <View style={{height:15, width:15, borderRadius:15, marginTop:1, backgroundColor:this.props.item.score_color}}/>
-                <Text style={{marginLeft:5}}>{this.props.item.code}</Text>
+                <Text style={{marginLeft:5}}>{score_name}</Text>
               </View>
             </View>
             <View style={{ flex:1, height:100}}>
