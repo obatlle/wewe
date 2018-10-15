@@ -13,39 +13,35 @@ const styles = StyleSheet.create({
   },
   cardContianer:{
     position:'absolute',
-    bottom:0,
-    width:width*0.95,
-    height:height*0.9,
+    top:160,
+    width:width*0.98,
+    height:height,
+    alignItems:'center',
     alignSelf:'center',
     borderTopLeftRadius:15,
-    borderTopRightRadius:15
+    borderTopRightRadius:15,
+    backgroundColor:'black'
   },
   backgroundCardImage:{
-    bottom:0,
-    width:width*0.95,
-    height:height*0.9+30,
-    backgroundColor:'black',
+    width:width*0.98,
+    height:height,
     alignSelf:'center',
     overflow: 'hidden',
     borderRadius:15
   },
   productInfoContainer:{
-    position:'absolute',
-    bottom:0,
-    width:width*0.95,
-    height:height*0.9,
-    alignSelf:'center'
+    width:width*0.98,
+    alignSelf:'center',
+    flexDirection:'column'
   },
   generalProductInfo:{
-    backgroundColor:'white',
-    width:width*0.9,
-    height:200,
+    width:width*0.95,
+    height:160,
     alignSelf:'center',
-    borderRadius:10
   },
   productImageContainer:{
     flexDirection:'row',
-    marginTop:40,
+    marginTop:10,
     marginLeft:20
   },
   productImage:{
@@ -54,7 +50,8 @@ const styles = StyleSheet.create({
   },
   productNameContainer:{
     flexDirection:'column',
-    marginLeft:20
+    marginLeft:20,
+    width: width-140
   },
   productName:{
     fontSize:24,
@@ -102,14 +99,14 @@ const styles = StyleSheet.create({
   },
   productCardContainer:{
     backgroundColor:color.backgroundCard,
-    width:width*0.9,
+    width:width*0.95,
     alignSelf:'center',
     borderRadius:10,
-    marginTop:20
+    marginTop:10
   },
   productCardTitle:{
     height:50,
-    width:width*0.9,
+    width:width*0.95,
     backgroundColor:color.greyLight,
     alignSelf:'center',
     flexDirection:'column',
@@ -125,8 +122,8 @@ const styles = StyleSheet.create({
   },
   scanButton:{
     position:'absolute',
-    bottom: 20,
-    width:width*0.8,
+    bottom: 50,
+    width:width*0.5,
     alignSelf:'center'
   },
   scanButtonText:{

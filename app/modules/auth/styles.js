@@ -1,14 +1,20 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 import * as theme from '../../styles/theme';
 const  { color, padding, windowWidth, normalize, fontSize, fontFamily } = theme;
 
+var {height, width} = Dimensions.get('window');
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: color.white,
+      alignSelf:'center',
       justifyContent: 'center',
-      padding: 10
+      padding: 10,
+      position:'absolute',
+      top:0,
+       width:width,
+       marginTop:30
     },
     wrapper: {
     },
@@ -16,24 +22,24 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: 'red',
     },
     slide2: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#97CAE5',
     },
     slide3: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#92BB',
     },
     text: {
       color: '#fff',
       fontSize: 30,
       fontWeight: 'bold',
+      marginTop: 10,
+      marginBottom:20,
+      textAlign:'center'
     },
 
 

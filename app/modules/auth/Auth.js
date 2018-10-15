@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert, Image,Dimensions } from 'react-native';
 
 import * as c from "../../config/constants";
 
@@ -15,6 +15,7 @@ import { Container, Form, Input, Item, Button, Label } from 'native-base';
 
 import Swiper from 'react-native-swiper';
 
+var {height, width} = Dimensions.get('window');
 
 
 export default class Auth extends React.Component {
@@ -137,93 +138,102 @@ export default class Auth extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <Container style={styles.container}>
-        <Form>
-          {!this.state.showEmailForm? (
-            <View>
-              <View style={{height:400, width:300, backgroundColor:'black', alignSelf:'center'}}>
-                <Swiper style={styles.wrapper} showsButtons={false} autoplay={true}>
-                  <View style={styles.slide1}>
-                    <Text style={styles.text}>Hello Swiper</Text>
-                  </View>
-                  <View style={styles.slide2}>
-                    <Text style={styles.text}>Beautiful</Text>
-                  </View>
-                  <View style={styles.slide3}>
-                    <Text style={styles.text}>And simple</Text>
-                  </View>
-                </Swiper>
+      <View>
+        <Image style={{width:width, height:height+5}} source={require('../../assets/images/backgroundLogin.png')}/>
+        <View style={styles.container}>
+          <View>
+            {!this.state.showEmailForm? (
+              <View style={{marginTop:30}}>
+                <View style={{height:400, width:width, alignSelf:'center'}}>
+                  <Swiper style={styles.wrapper} showsButtons={false} autoplay={true}>
+                    <View style={styles.slide1}>
+                      <Image style={{width:250, height:250}} source={require('../../assets/images/tutorialSlide1.png')}/>
+                      <View style={{width:300}}>
+                        <Text style={styles.text}>Scan barcode products</Text>
+                      </View>
+                    </View>
+                    <View style={styles.slide2}>
+                      <Image style={{width:250, height:250}} source={require('../../assets/images/tutorialSlide1.png')}/>
+                      <View style={{width:300}}>
+                        <Text style={styles.text}>Know what you eat</Text>
+                      </View>
+                    </View>
+                    <View style={styles.slide3}>
+                      <Image style={{width:250, height:250}} source={require('../../assets/images/tutorialSlide1.png')}/>
+                      <View style={{width:300}}>
+                        <Text style={styles.text}>Find healthier alternatives</Text>
+                      </View>
+                    </View>
+                  </Swiper>
+                </View>
+                <View style={{height:20, width:200, alignSelf:'center'}}>
+                </View>
               </View>
-              <View style={{height:20, width:200, alignSelf:'center'}}>
+            ):(
+              <View>
               </View>
-            </View>
-          ):(
-            <View>
-            </View>
-          )}
-          <Button style={{ marginTop: 10,backgroundColor: '#4267b2', borderRadius: 30, marginLeft:15, marginRight:15 }}
-            full
-            rounded
-            primary
-            onPress={() => this.loginWithFacebook()}
-          >
-            <Text style={{ color: 'white' , fontSize:16 }}>Sign in with Facebook</Text>
-          </Button>
+            )}
+            <Button style={{ marginTop: 10,backgroundColor: '#4267b2', borderRadius: 30, marginLeft:15, marginRight:15 }}
+              full
+              rounded
+              primary
+              onPress={() => this.loginWithFacebook()}
+            >
+              <Text style={{ color: 'white' , fontSize:16 }}>Sign in with Facebook</Text>
+            </Button>
 
-          <Button style={{ marginTop: 10,backgroundColor: '#4285F4', borderRadius: 30, marginLeft:15, marginRight:15 }}
-            full
-            rounded
-            primary
-            onPress={() => this.loginWithGoogle()}
-          >
-            <Text style={{ color: 'white', fontSize:16  }}> Sign in with Google</Text>
-          </Button>
+            <Button style={{ marginTop: 10,backgroundColor: '#4285F4', borderRadius: 30, marginLeft:15, marginRight:15 }}
+              full
+              rounded
+              primary
+              onPress={() => this.loginWithGoogle()}
+            >
+              <Text style={{ color: 'white', fontSize:16  }}> Sign in with Google</Text>
+            </Button>
 
 
-          <Text style={{ color: '#CACACA', marginTop: 15, textAlign:'center', fontSize:16 }}>or signin using an
-            <Text> </Text>
-            <Text style={{color:'#CACACA', fontWeight:'bold',textDecorationLine: 'underline'}} onPress={() => this.setState({ showEmailForm:!this.state.showEmailForm })}>email</Text>
-          </Text>
+            <Text style={{ color: 'white', marginTop: 15, textAlign:'center', fontSize:16 }}>or signin using an
+              <Text> </Text>
+              <Text style={{color:'white', fontWeight:'bold',textDecorationLine: 'underline'}} onPress={() => this.setState({ showEmailForm:!this.state.showEmailForm })}>email</Text>
+            </Text>
 
-          {this.state.showEmailForm? (
-            <View style={{marginTop:70}}>
-              <Item floatingLabel>
-                <Label>Email</Label>
-                <Input
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                  onChangeText={(email) => this.setState({ email })}
-                />
+            {this.state.showEmailForm? (
+              <View style={{marginTop:20}}>
+                <View style={{backgroundColor:'white', borderRadius:15, overflow:'hidden', padding:18}}>
+                  <Item floatingLabel>
+                    <Label style={{}}>Email</Label>
+                    <Input
+                      autoCorrect={false}
+                      autoCapitalize="none"
+                      onChangeText={(email) => this.setState({ email })}
+                    />
+                  </Item>
+                  <Item floatingLabel >
+                    <Label style={{}}>Password</Label>
+                    <Input
+                      secureTextEntry={true}
+                      autoCorrect={false}
+                      autoCapitalize="none"
+                      onChangeText={(password) => this.setState({ password })}
+                    />
+                  </Item>
+                </View>
 
-              </Item>
-
-              <Item floatingLabel>
-                <Label>Password</Label>
-                <Input
-                  secureTextEntry={true}
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                  onChangeText={(password) => this.setState({ password })}
-                />
-              </Item>
-
-              <Button style={{ marginTop: 10,backgroundColor: 'red', borderRadius: 30, marginLeft:15, marginRight:15 }}
-                full
-                rounded
-                primary
-                onPress={() => this.loginUser(this.state.email, this.state.password)}
-              >
-                <Text style={{ color: 'white' }}> Sign in with an email</Text>
-              </Button>
-            </View>
-          ):(
-            <View></View>
-          )}
-
-
-
-        </Form>
-      </Container>
+                <Button style={{ marginTop: 10,backgroundColor: 'red', borderRadius: 30, marginLeft:15, marginRight:15 }}
+                  full
+                  rounded
+                  primary
+                  onPress={() => this.loginUser(this.state.email, this.state.password)}
+                >
+                  <Text style={{ color: 'white' }}> Sign in with an email</Text>
+                </Button>
+              </View>
+            ):(
+              <View></View>
+            )}
+          </View>
+        </View>
+      </View>
     );
   }
 }

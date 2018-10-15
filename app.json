@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "wewe",
-    "description": "This project is really great.",
+    "description": "Scan your food",
     "slug": "wewe",
     "privacy": "public",
     "sdkVersion": "30.0.0",
