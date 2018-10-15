@@ -10,10 +10,12 @@ const { View, TouchableHighlight, Text } = ReactNative;
 
 var {height, width} = Dimensions.get('window');
 
+
+
 class Tabbar extends Component {
   constructor(props) {
     super(props);
-
+    console.log(this.props.navigation.state.routeName)
   }
 
   render() {
@@ -24,22 +26,38 @@ class Tabbar extends Component {
         <View style={{flexDirection:'row'}}>
           <TouchableOpacity style={{height:45,width:width/4}} onPress={() => navigate('Home')}>
             <View style={{flex:1, alignItems:'center'}}>
-              <MaterialCommunityIcons style={{alignSelf:'center', marginTop:10}} name="home" size={25} color="#9E9E9E" />
+              {this.props.navigation.state.routeName=='Home'?(
+                <MaterialCommunityIcons style={{alignSelf:'center', marginTop:10}} name="home" size={25} color="#0A1669" />
+              ):(
+                <MaterialCommunityIcons style={{alignSelf:'center', marginTop:10}} name="home" size={25} color="#9E9E9E" />
+              )}
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={{height:45,width:width/4}} onPress={() => navigate('Scan')}>
             <View style={{flex:1, alignItems:'center'}}>
-              <MaterialCommunityIcons style={{alignSelf:'center', marginTop:10}} name="barcode-scan" size={25} color="#9E9E9E" />
+              {this.props.navigation.state.routeName=='Scan'?(
+                <MaterialCommunityIcons style={{alignSelf:'center', marginTop:10}} name="barcode-scan" size={25} color="#0A1669" />
+              ):(
+                <MaterialCommunityIcons style={{alignSelf:'center', marginTop:10}} name="barcode-scan" size={25} color="#9E9E9E" />
+              )}
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={{height:45,width:width/4}} onPress={() => navigate('HistoricalList')}>
             <View style={{flex:1, alignItems:'center'}}>
-              <MaterialCommunityIcons style={{alignSelf:'center', marginTop:10}} name="bookmark-outline" size={25} color="#9E9E9E" />
+              {this.props.navigation.state.routeName=='HistoricalList'?(
+                <MaterialCommunityIcons style={{alignSelf:'center', marginTop:10}} name="bookmark-outline" size={25} color="#0A1669" />
+              ):(
+                <MaterialCommunityIcons style={{alignSelf:'center', marginTop:10}} name="bookmark-outline" size={25} color="#9E9E9E" />
+              )}
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={{height:45,width:width/4}} onPress={() => navigate('Home')}>
             <View style={{flex:1, alignItems:'center'}}>
-              <MaterialCommunityIcons style={{alignSelf:'center', marginTop:10}} name="account" size={25} color="#9E9E9E" />
+              {this.props.navigation.state.routeName=='Profile'?(
+                <MaterialCommunityIcons style={{alignSelf:'center', marginTop:10}} name="account" size={25} color="#0A1669" />
+              ):(
+                <MaterialCommunityIcons style={{alignSelf:'center', marginTop:10}} name="account" size={25} color="#9E9E9E" />
+              )}
             </View>
           </TouchableOpacity>
         </View>
@@ -47,5 +65,7 @@ class Tabbar extends Component {
     );
   }
 }
+
+
 
 module.exports = Tabbar;
