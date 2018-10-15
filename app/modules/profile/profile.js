@@ -115,14 +115,15 @@ class Profile extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{flex:1}}>
-          <View style={{marginTop:100}}>
+          <Text style={{marginTop:40,fontSize:24, fontFamily:'RobotoBold', color:'#9E9E9E', alignSelf:'center'}}>{this.props.userName} food</Text>
+          <View style={{marginTop:20}}>
             <PieChart
                   style={ { height: 200 } }
                   data={ pieData }
                   colors={colors}
               />
               <View>
-                <View style={{marginTop:25, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+                <View style={{marginTop:30, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
                 <View style={{flexDirection:'row'}}>
                   <View style={{height:15, width:15, borderRadius:15, backgroundColor:'darkgreen', marginLeft:30, marginTop:15}} />
                   <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Excellent</Text>
@@ -203,6 +204,7 @@ function mapDispatchToProps (dispatch) {
 function mapStateToProps (state) {
   return {
         userUID: state.getUserUID,
+        userName: state.getUserName,
   };
 }
 

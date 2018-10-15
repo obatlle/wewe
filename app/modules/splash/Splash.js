@@ -55,7 +55,8 @@ class Splash extends React.Component {
       if (user != null) {
         console.log(user.providerData[0].displayName)
         this.props.getUserUID(user.uid)
-        this.props.getUserName(user.providerData[0].displayName)
+        this.props.getUserName(user.providerData[0].displayName
+        )
         this.setState({isLoggedIn:true});
         navigate('Home')
       } else {
