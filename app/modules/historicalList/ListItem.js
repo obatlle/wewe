@@ -6,24 +6,30 @@ import styles from "./styles";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const { View, TouchableHighlight, Text } = ReactNative;
+
+import * as theme from '../../styles/theme';
 const  { color, padding, windowWidth, normalize, fontSize, fontFamily } = theme;
 
 
 class ListItem extends Component {
-  let score_name=''
-  if(this.props.item.score_color==color.scoreExcellent){
-    score_name='Excellent'
-  }else if(this.props.item.score_color==color.scoreGood){
-    score_name='Good'
-  }else if(this.props.item.score_color==color.scoreMedium){
-    score_name='Medium'
-  }else if(this.props.item.score_color==color.scoreRegular){
-    score_name='Regular'
-  }else if(this.props.item.score_color==color.scoreBad){
-    score_name='Bad'
-  }
+
 
   render() {
+
+      var score_name=null
+
+      if(this.props.item.score_color==color.scoreExcellent){
+        score_name='Excellent'
+      }else if(this.props.item.score_color==color.scoreGood){
+        score_name='Good'
+      }else if(this.props.item.score_color==color.scoreMedium){
+        score_name='Medium'
+      }else if(this.props.item.score_color==color.scoreRegular){
+        score_name='Regular'
+      }else if(this.props.item.score_color==color.scoreBad){
+        score_name='Bad'
+      }
+
     return (
       <TouchableHighlight onPress={this.props.onPress}>
         <View style={{height:100, backgroundColor:'white', flex:1,marginTop:6, borderRadius:10}}>
