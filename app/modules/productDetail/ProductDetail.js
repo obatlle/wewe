@@ -20,6 +20,8 @@ var {height, width} = Dimensions.get('window');
 
 const Tabbar = require('../Tabbar/tabbar');
 
+import * as theme from '../../styles/theme';
+const  { color, padding, windowWidth, normalize, fontSize, fontFamily } = theme;
 
 
 class ProductDetail extends React.Component {
@@ -146,7 +148,6 @@ class ProductDetail extends React.Component {
       fat=0
     }else{
       fat = productInfo.data.product.nutriments.saturatedfat_100g
-      fat=+fat.toFixed(2)
     }
 
     let sugar = ''
@@ -154,21 +155,15 @@ class ProductDetail extends React.Component {
       sugar=0
     }else{
       sugar = productInfo.data.product.nutriments.sugars_100g
-      sugar=+sugar.toFixed(2)
     }
 
     let sodium = productInfo.data.product.nutriments.sodium_100g
-    sodium=+sodium.toFixed(2)
     let fruits = productInfo.data.product.nutriments.fruitsvegetablesnuts_100g_estimate
-    fruits=+fruits.toFixed(2)
     let fiber = productInfo.data.product.nutriments.fiber_100g
-    fiber=+fiber.toFixed(2)
     let proteins = productInfo.data.product.nutriments.proteins_100g
-    proteins=+proteins.toFixed(2)
     let salt = productInfo.data.product.nutriments.salt_100g
-    salt=+salt.toFixed(2)
     let score = productInfo.data.product.nutriments.nutritionscorefr_100g
-    
+
     let additives= productInfo.data.product.additives_n
 
     let category=''
@@ -204,6 +199,15 @@ class ProductDetail extends React.Component {
     let fruits_score=''
     let additives_score=''
 
+    let fat_color=null
+    let sugar_color=null
+    let energy_color=null
+    let salt_color=null
+    let proteins_color=null
+    let fiber_color=null
+    let fruits_color=null
+    let additives_color=null
+
     let bad_score=0
     let good_score=0
 
@@ -211,80 +215,176 @@ class ProductDetail extends React.Component {
       if (salt>0.7){
         salt_score='bad'
         bad_score=bad_score+1
+        if (salt>1.4){
+          salt_color=color.scoreBad
+        }else{
+          salt_color=color.scoreRegular
+        }
       }else if (salt<=0.7){
         salt_score='good'
         good_score=good_score+1
+        if(salt<=0.23){
+          salt_color=color.scoreExcellent
+        }else{
+          salt_color=color.scoreGood
+        }
       }
       if (sugar>3){
         sugar_score='bad'
         bad_score=bad_score+1
+        if(sugar>7){
+          sugar_color=color.scoreBad
+        }else{
+          sugar_color=color.scoreRegular
+        }
       }else if (sugar<=3){
         sugar_score='good'
         good_score=good_score+1
+        if(sugar<=1.5){
+          sugar_color=color.scoreExcellent
+        }else{
+          sugar_color=color.scoreGood
+        }
       }
       if (energy>14){
         energy_score='bad'
         bad_score=bad_score+1
+        if(energy>35){
+          energy_color=color.scoreBad
+        }else{
+          energy_color=color.scoreRegular
+        }
       }else if (energy<=14){
         energy_score='good'
         good_score=good_score+1
+        if(energy<=1){
+          energy_color=color.scoreExcellent
+        }else{
+          energy_color=color.scoreGood
+        }
       }
       if (fat>3){
         fat_score='bad'
         bad_score=bad_score+1
+        if(fat>6){
+          fat_color=color.scoreBad
+        }else{
+          fat_color=color.scoreRegular
+        }
       }else if (fat<=3){
         fat_score='good'
         good_score=good_score+1
+        if(fat<=1){
+          fat_color=color.scoreExcellent
+        }else{
+          fat_color=color.scoreGood
+        }
       }
     } else{
       if (salt>0.92){
         salt_score='bad'
         bad_score=bad_score+1
+        if(salt>1.62){
+          salt_color=color.scoreBad
+        }else{
+          salt_color=color.scoreRegular
+        }
       }else if (salt<=0.92){
         salt_score='good'
         good_score=good_score+1
+        if(salt<=0.46){
+          salt_color=color.scoreExcellent
+        }else{
+          salt_color=color.scoreGood
+        }
       }
       if (sugar>18){
         sugar_score='bad'
         bad_score=bad_score+1
+        if(sugar>31){
+          sugar_color=color.scoreBad
+        }else{
+          sugar_color=color.scoreRegular
+        }
       }else if (sugar<=18){
         sugar_score='good'
         good_score=good_score+1
+        if(sugar<=9){
+          sugar_color=color.scoreExcellent
+        }else{
+          sugar_color=color.scoreGood
+        }
       }
       if (energy>360){
         energy_score='bad'
         bad_score=bad_score+1
+        if(energy>560){
+          energy_color=color.scoreBad
+        }else{
+          energy_color=color.scoreRegular
+        }
       }else if (energy<=360){
         energy_score='good'
         good_score=good_score+1
+        if(energy<=160){
+          energy_color=color.scoreExcellent
+        }else{
+          energy_color=color.scoreGood
+        }
       }
       if (fat>4){
         fat_score='bad'
         bad_score=bad_score+1
+        if(fat>7){
+          fat_color=color.scoreBad
+        }else{
+          fat_color=color.scoreRegular
+        }
       }else if (fat<=4){
         fat_score='good'
         good_score=good_score+1
+        if(fat<=2){
+          fat_color=color.scoreExcellent
+        }else{
+          fat_color=color.scoreGood
+        }
       }
     }
 
     if (proteins>0) {
       proteins_score='good'
       good_score=good_score+1
+      if(proteins>8){
+        proteins_color=color.scoreExcellent
+      }else{
+        proteins_color=color.scoreGood
+      }
     }
 
     if (fiber>0) {
       fiber_score='good'
       good_score=good_score+1
+      if(fiber>3.5){
+        fiber_color=color.scoreExcellent
+      }else{
+        fiber_color=color.scoreGood
+      }
     }
 
     if (fruits>0) {
       fruits_score='good'
       good_score=good_score+1
+      if(fruits>80){
+        fruits_color=color.scoreExcellent
+      }else{
+        fruits_color=color.scoreGood
+      }
     }
 
     if (additives>0) {
       additives_score='bad'
       bad_score=bad_score+1
+      additives_color=color.scoreBad
     }
 
     let has_bad=(energy_score=='bad' | salt_score=='bad' | sugar_score=='bad' | fat_score=='bad' | additives_score=='bad' )
@@ -382,14 +482,17 @@ class ProductDetail extends React.Component {
 
 
               {has_bad>0?(
-              <View style={[styles.productCardContainer,{height:40*bad_score+50}]}>
+              <View style={[styles.productCardContainer,{height:50*bad_score+55}]}>
                 <View style={styles.productCardTitle}>
                   <Text style={styles.productCardTitleText}>Product handicap</Text>
                 </View>
                 {energy_score=='bad'?(
                   <View>
-                    <View style={{height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
-                      <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Energy: {energy} kCal</Text>
+                    <View style={{width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
+                      <Image style={styles.nutrientIcon} source={require('../../assets/images/calories_icon.png')}/>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Energy: {energy} kCal</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:energy_color, marginTop:20, marginLeft:10}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -398,8 +501,11 @@ class ProductDetail extends React.Component {
                 )}
                 {salt_score=='bad'?(
                   <View>
-                    <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
-                      <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Salt: {salt} g</Text>
+                    <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
+                      <Image style={styles.nutrientIcon} source={require('../../assets/images/salt_icon.png')}/>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Salt: {salt} g</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:salt_color, marginTop:20, marginLeft:10}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -408,8 +514,11 @@ class ProductDetail extends React.Component {
                 )}
                 {sugar_score=='bad'?(
                   <View>
-                    <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
-                      <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Sugar: {sugar} g</Text>
+                    <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
+                      <Image style={styles.nutrientIcon} source={require('../../assets/images/sugar_icon.png')}/>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Sugar: {sugar} g</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:sugar_color, marginTop:20, marginLeft:10}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -418,8 +527,11 @@ class ProductDetail extends React.Component {
                 )}
                 {fat_score=='bad'?(
                   <View>
-                    <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
-                      <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Fat: {fat} g</Text>
+                    <View style={{width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
+                      <Image style={styles.nutrientIcon} source={require('../../assets/images/fat_icon.png')}/>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Fat: {fat} g</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:fat_color, marginTop:20, marginLeft:10}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -428,8 +540,11 @@ class ProductDetail extends React.Component {
                 )}
                 {additives_score=='bad'?(
                   <View>
-                    <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
-                      <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Additives: {additives}</Text>
+                    <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
+                      <Image style={styles.nutrientIcon} source={require('../../assets/images/additives_icon.png')}/>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Additives: {additives}</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:additives_color, marginTop:20, marginLeft:10}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -443,14 +558,17 @@ class ProductDetail extends React.Component {
 
 
               {has_good>0?(
-              <View style={[styles.productCardContainer,{height:40*good_score+50}]}>
+              <View style={[styles.productCardContainer,{height:50*good_score+55}]}>
                 <View style={styles.productCardTitle}>
                   <Text style={styles.productCardTitleText}>Product banefits</Text>
                 </View>
                 {energy_score=='good'?(
                   <View>
-                    <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
-                      <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Energy: {energy} kCal</Text>
+                    <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
+                      <Image style={styles.nutrientIcon} source={require('../../assets/images/calories_icon.png')}/>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Energy: {energy} kCal</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:energy_color, marginTop:20, marginLeft:10}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -459,8 +577,11 @@ class ProductDetail extends React.Component {
                 )}
                 {salt_score=='good'?(
                   <View>
-                    <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
-                      <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Salt: {salt} g</Text>
+                    <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
+                      <Image style={styles.nutrientIcon} source={require('../../assets/images/salt_icon.png')}/>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Salt: {salt} g</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:salt_color, marginTop:20, marginLeft:10}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -469,8 +590,11 @@ class ProductDetail extends React.Component {
                 )}
                 {sugar_score=='good'?(
                   <View>
-                    <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
-                      <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Sugar: {sugar} g</Text>
+                    <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
+                      <Image style={styles.nutrientIcon} source={require('../../assets/images/sugar_icon.png')}/>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Sugar: {sugar} g</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:sugar_color, marginTop:20, marginLeft:10}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -479,8 +603,11 @@ class ProductDetail extends React.Component {
                 )}
                 {fat_score=='good'?(
                   <View>
-                    <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
-                      <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Fat: {fat} g</Text>
+                    <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
+                      <Image style={styles.nutrientIcon} source={require('../../assets/images/fat_icon.png')}/>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Fat: {fat} g</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:fat_color, marginTop:20, marginLeft:10}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -489,8 +616,11 @@ class ProductDetail extends React.Component {
                 )}
                 {proteins_score=='good'?(
                   <View>
-                    <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
-                      <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Proteins: {proteins} g</Text>
+                    <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
+                      <Image style={styles.nutrientIcon} source={require('../../assets/images/protein_icon.png')}/>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Proteins: {proteins} g</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:proteins_color, marginTop:20, marginLeft:10}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -499,8 +629,11 @@ class ProductDetail extends React.Component {
                 )}
                 {fiber_score=='good'?(
                   <View>
-                    <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
-                      <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Fiber: {fiber} g</Text>
+                    <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
+                      <Image style={styles.nutrientIcon} source={require('../../assets/images/fiber_icon.png')}/>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Fiber: {fiber} g</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:fiber_color, marginTop:20, marginLeft:10}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -509,8 +642,11 @@ class ProductDetail extends React.Component {
                 )}
                 {fruits_score=='good'?(
                   <View>
-                    <View style={{ height:30, width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
-                      <Text style={{fontSize:18, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Fruits: {fruits} %</Text>
+                    <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
+                      <Image style={styles.nutrientIcon} source={require('../../assets/images/fruit_icon.png')}/>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Fruits: {fruits} %</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:fruits_color, marginTop:20, marginLeft:10}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>

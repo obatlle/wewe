@@ -129,6 +129,11 @@ const styles = StyleSheet.create({
   scanButtonText:{
     color:'white',
     marginLeft:8
+  },
+  nutrientIcon:{
+    height:50,
+    width:50,
+    marginLeft:10
   }
 
 

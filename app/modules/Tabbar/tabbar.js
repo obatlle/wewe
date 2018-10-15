@@ -51,7 +51,7 @@ class Tabbar extends Component {
               )}
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={{height:45,width:width/4}} onPress={() => navigate('Home')}>
+          <TouchableOpacity style={{height:45,width:width/4}} onPress={() => navigate('Profile')}>
             <View style={{flex:1, alignItems:'center'}}>
               {this.props.navigation.state.routeName=='Profile'?(
                 <MaterialCommunityIcons style={{alignSelf:'center', marginTop:10}} name="account" size={25} color="#0A1669" />
