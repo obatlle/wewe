@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   nutrientIcon:{
     height:50,
     width:50,
-    marginLeft:10
+    marginLeft:0
   }
 
 

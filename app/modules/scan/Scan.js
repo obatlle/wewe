@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View , Alert, Dimensions, Button, TouchableWithoutFeedback} from 'react-native';
+import { StyleSheet, Text, View , Alert, Dimensions, TouchableWithoutFeedback} from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
 
 import styles from "./styles";
@@ -7,6 +7,8 @@ import styles from "./styles";
 import { Analytics, ScreenHit, Event } from 'expo-analytics';
 
 import axios from 'axios';
+
+import { Button } from 'native-base';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -54,7 +56,7 @@ class Scan extends React.Component {
     const { getProductInfo } = this.props;
     axios.get('https://world.openfoodfacts.org/api/v0/product/'+JSON.stringify(data.data)+'.json')
     .then(response => {
-      (response.length>=200)?
+      JSON.stringify(response.length>=100)?
       (this.setState({unkownProduct:false,loadedProductInfo:this.state.loadedProductInfo+1}), this.props.getProductInfo(response)
     ):(
       this.setState({unkownProduct:true})
@@ -115,7 +117,7 @@ class Scan extends React.Component {
                     success
                     onPress={() => navigate('Scan')}
                   >
-                    <Text style={[styles.textField,{color:'white', marginLeft:8}]}>Add it to Zebra</Text>
+                    <Text style={{color:'white', marginLeft:8}}>Add it to Zebra</Text>
                   </Button>
                 </View>
               ):(
