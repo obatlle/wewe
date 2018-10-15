@@ -68,7 +68,7 @@ class Scan extends React.Component {
     }else if (this.state.unkownProduct==true){
       this.timeoutHandle = setTimeout(()=>{
           this.setState({ unkownProduct: null })
-     }, 5000);
+     }, 8000);
     }
   }
 
@@ -104,7 +104,19 @@ class Scan extends React.Component {
                 </View>
               </View>
               {this.state.unkownProduct==true?(
-                <View style={{height:height*0.2, width:width*0.8, backgroundColor:'yellow'}}>
+                <View style={{position:'absolute',bottom:60,height:height*0.2, width:width*0.8, backgroundColor:'yellow'}}>
+                  <View style={{flexDirection:'row'}}>
+                    <View style={{backgroundColor:'#9E9E9E', borderRadius:10, height:10, width:10}}></View>
+                    <Text style={[styles.textField,{marginLeft:8, color:'#9E9E9E'}]}>Product not Found</Text>
+                  </View>
+                  <Button style={{width:width*0.5, marginTop:30, alignSelf:'center', flexDirection:'row'}}
+                    full
+                    rounded
+                    success
+                    onPress={() => navigate('Scan')}
+                  >
+                    <Text style={[styles.textField,{color:'white', marginLeft:8}]}>Add it to Zebra</Text>
+                  </Button>
                 </View>
               ):(
                 <View>
