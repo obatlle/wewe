@@ -383,7 +383,9 @@ class ProductDetail extends React.Component {
                   <View>
                     <View style={{width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
                       <Image style={styles.nutrientIcon} source={require('../../assets/images/calories_icon.png')}/>
-                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Energy: {energy} kCal</Text>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Energy: {energy} kCal</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:'black', marginTop:20}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -394,7 +396,9 @@ class ProductDetail extends React.Component {
                   <View>
                     <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
                       <Image style={styles.nutrientIcon} source={require('../../assets/images/salt_icon.png')}/>
-                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Salt: {salt} g</Text>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Salt: {salt} g</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:'black', marginTop:20}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -405,7 +409,9 @@ class ProductDetail extends React.Component {
                   <View>
                     <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
                       <Image style={styles.nutrientIcon} source={require('../../assets/images/sugar_icon.png')}/>
-                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Sugar: {sugar} g</Text>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Sugar: {sugar} g</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:'black', marginTop:20}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -416,7 +422,9 @@ class ProductDetail extends React.Component {
                   <View>
                     <View style={{width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
                       <Image style={styles.nutrientIcon} source={require('../../assets/images/fat_icon.png')}/>
-                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Fat: {fat} g</Text>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Fat: {fat} g</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:'black', marginTop:20}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -427,7 +435,9 @@ class ProductDetail extends React.Component {
                   <View>
                     <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
                       <Image style={styles.nutrientIcon} source={require('../../assets/images/additives_icon.png')}/>
-                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Additives: {additives}</Text>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Additives: {additives}</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:'black', marginTop:20}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -449,7 +459,9 @@ class ProductDetail extends React.Component {
                   <View>
                     <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
                       <Image style={styles.nutrientIcon} source={require('../../assets/images/calories_icon.png')}/>
-                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Energy: {energy} kCal</Text>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Energy: {energy} kCal</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:'black', marginTop:20}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -460,7 +472,9 @@ class ProductDetail extends React.Component {
                   <View>
                     <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
                       <Image style={styles.nutrientIcon} source={require('../../assets/images/salt_icon.png')}/>
-                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Salt: {salt} g</Text>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Salt: {salt} g</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:'black', marginTop:20}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -471,7 +485,9 @@ class ProductDetail extends React.Component {
                   <View>
                     <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
                       <Image style={styles.nutrientIcon} source={require('../../assets/images/sugar_icon.png')}/>
-                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Sugar: {sugar} g</Text>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Sugar: {sugar} g</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:'black', marginTop:20}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -482,7 +498,9 @@ class ProductDetail extends React.Component {
                   <View>
                     <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
                       <Image style={styles.nutrientIcon} source={require('../../assets/images/fat_icon.png')}/>
-                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Fat: {fat} g</Text>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Fat: {fat} g</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:'black', marginTop:20}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -493,7 +511,9 @@ class ProductDetail extends React.Component {
                   <View>
                     <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
                       <Image style={styles.nutrientIcon} source={require('../../assets/images/protein_icon.png')}/>
-                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Proteins: {proteins} g</Text>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Proteins: {proteins} g</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:'black', marginTop:20}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -504,7 +524,9 @@ class ProductDetail extends React.Component {
                   <View>
                     <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
                       <Image style={styles.nutrientIcon} source={require('../../assets/images/fiber_icon.png')}/>
-                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Fiber: {fiber} g</Text>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Fiber: {fiber} g</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:'black', marginTop:20}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
@@ -515,7 +537,9 @@ class ProductDetail extends React.Component {
                   <View>
                     <View style={{ width:width*0.9, backgroundColor:'white', alignSelf:'center', flexDirection:'row'}}>
                       <Image style={styles.nutrientIcon} source={require('../../assets/images/fruit_icon.png')}/>
-                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:4}}>Fruits: {fruits} %</Text>
+                      <Text style={{fontSize:20, fontFamily:'RobotoLight', marginLeft:10, marginTop:10}}>Fruits: {fruits} %</Text>
+                      <View style={{flex:1}}/>
+                      <View style={{height:10, width:10, borderRadius:10, backgroundColor:'black', marginTop:20}}/>
                     </View>
                     <View style={{height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#F0F0F0'}}/>
                   </View>
