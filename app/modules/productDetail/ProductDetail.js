@@ -133,6 +133,7 @@ class ProductDetail extends React.Component {
       energy = productInfo.data.product.nutriments.energy_100g
     }else{
       energy = productInfo.data.product.nutriments.energy_100g*0.239006
+      energy=+energy.toFixed(2)
     }
 
     let fat = ''
@@ -140,6 +141,7 @@ class ProductDetail extends React.Component {
       fat=0
     }else{
       fat = productInfo.data.product.nutriments.saturatedfat_100g
+      fat=+fat.toFixed(2)
     }
 
     let sugar = ''
@@ -147,16 +149,22 @@ class ProductDetail extends React.Component {
       sugar=0
     }else{
       sugar = productInfo.data.product.nutriments.sugars_100g
+      sugar=+sugar.toFixed(2)
     }
 
-    const sodium = productInfo.data.product.nutriments.sodium_100g
-    const fruits = productInfo.data.product.nutriments.fruitsvegetablesnuts_100g_estimate
-    const fiber = productInfo.data.product.nutriments.fiber_100g
-    const proteins = productInfo.data.product.nutriments.proteins_100g
-    const salt = productInfo.data.product.nutriments.salt_100g
-    const score = productInfo.data.product.nutriments.nutritionscorefr_100g
-
-    const additives= productInfo.data.product.additives_n
+    let sodium = productInfo.data.product.nutriments.sodium_100g
+    sodium=+sodium.toFixed(2)
+    let fruits = productInfo.data.product.nutriments.fruitsvegetablesnuts_100g_estimate
+    fruits=+fruits.toFixed(2)
+    let fiber = productInfo.data.product.nutriments.fiber_100g
+    fiber=+fiber.toFixed(2)
+    let proteins = productInfo.data.product.nutriments.proteins_100g
+    proteins=+proteins.toFixed(2)
+    let salt = productInfo.data.product.nutriments.salt_100g
+    salt=+salt.toFixed(2)
+    let score = productInfo.data.product.nutriments.nutritionscorefr_100g
+    
+    let additives= productInfo.data.product.additives_n
 
     let category=''
     if (productInfo.data.product.categories_hierarchy === undefined){

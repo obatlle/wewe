@@ -36,7 +36,8 @@ class Scan extends React.Component {
     this.state = {
           loadedProductInfo:0,
           hasCameraPermission: null,
-          productInfo: null
+          productInfo: null,
+          unkownProduct:null,
     };
   }
 
@@ -50,15 +51,27 @@ class Scan extends React.Component {
   _handleBarCodeRead = data => {
     const { getProductInfo } = this.props;
     axios.get('https://world.openfoodfacts.org/api/v0/product/'+JSON.stringify(data.data)+'.json')
-    .then(response => {this.setState({loadedProductInfo:this.state.loadedProductInfo+1}),this.props.getProductInfo(response)});
+    .then(response => {
+      (response.length>=200)?
+      (this.setState({unkownProduct:false,loadedProductInfo:this.state.loadedProductInfo+1}), this.props.getProductInfo(response)
+    ):(
+      this.setState({unkownProduct:true})
+    )});
   };
 
   componentDidUpdate(){
-    if (this.state.loadedProductInfo===1 && JSON.stringify(this.props.productInfo).length>10){
+    if (this.state.unkownProduct==false && this.state.loadedProductInfo===1 && JSON.stringify(this.props.productInfo).length>10){
       const { navigate } = this.props.navigation;
-
       navigate('ProductDetail')
+    }else if (this.state.unkownProduct==true){
+      this.timeoutHandle = setTimeout(()=>{
+          this.setState({ unkownProduct: null })
+     }, 5000);
     }
+  }
+
+  componentWillUnmount(){
+       clearTimeout(this.timeoutHandle);
   }
 
   render() {
@@ -85,6 +98,13 @@ class Scan extends React.Component {
                 <Text style={{alignSelf:'center', fontSize: 18, color:'white',fontFamily:'RobotoLight',marginBottom:12}}>Scan a product barcode</Text>
                 <View style={{borderColor:'white', borderRadius:10, borderWidth:2, width:width*0.8, flex:1, alignSelf:'center'}}/>
               </View>
+              {this.state.unkownProduct==true?(
+                <View style={{height:height*0.2, width:width*0.8, backgroundColor:'yellow'}}>
+                </View>
+              ):(
+                <View>
+                </View>
+              )}
             </View>
         }
       </View>
