@@ -15,3 +15,10 @@ export const getUserUID = createReducer('',{
     return action.userUID;
   }
 });
+
+export const getUserName = createReducer('',{
+  [types.GET_USER_NAME](state, action){
+    console.log('reducer state:')
+    return action.userName;
+  }
+});

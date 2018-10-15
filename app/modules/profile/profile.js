@@ -36,11 +36,11 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      red_products:null,
-      yellow_products:null,
-      orange_products:null,
-      green_products:null,
-      darkgreen_products:null
+      red_products:0,
+      yellow_products:0,
+      orange_products:0,
+      green_products:0,
+      darkgreen_products:0
     };
 
   }
@@ -121,6 +121,58 @@ class Profile extends React.Component {
                   data={ pieData }
                   colors={colors}
               />
+              <View>
+                <View style={{marginTop:25, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+                <View style={{flexDirection:'row'}}>
+                  <View style={{height:15, width:15, borderRadius:15, backgroundColor:'darkgreen', marginLeft:30, marginTop:15}} />
+                  <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Excellent</Text>
+                  <View style={{flex:1}} />
+                  <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.darkgreen_products}</Text>
+                  <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
+                </View>
+              </View>
+              <View>
+                <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+                <View style={{flexDirection:'row'}}>
+                  <View style={{height:15, width:15, borderRadius:15, backgroundColor:'green', marginLeft:30, marginTop:15}} />
+                  <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Good</Text>
+                  <View style={{flex:1}} />
+                  <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.green_products}</Text>
+                  <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
+                </View>
+              </View>
+              <View>
+                <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+                <View style={{flexDirection:'row'}}>
+                  <View style={{height:15, width:15, borderRadius:15, backgroundColor:'yellow', marginLeft:30, marginTop:15}} />
+                  <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Medium</Text>
+                  <View style={{flex:1}} />
+                  <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.yellow_products}</Text>
+                  <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
+                </View>
+              </View>
+              <View>
+                <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+                <View style={{flexDirection:'row'}}>
+                  <View style={{height:15, width:15, borderRadius:15, backgroundColor:'orange', marginLeft:30, marginTop:15}} />
+                  <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Regular</Text>
+                  <View style={{flex:1}} />
+                  <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.orange_products}</Text>
+                  <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
+                </View>
+              </View>
+              <View>
+                <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+                <View style={{flexDirection:'row'}}>
+                  <View style={{height:15, width:15, borderRadius:15, backgroundColor:'red', marginLeft:30, marginTop:15}} />
+                  <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Bad</Text>
+                  <View style={{flex:1}} />
+                  <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.red_products}</Text>
+                  <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
+                </View>
+                <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+              </View>
+
             </View>
         </View>
         <Button style={{position:'absolute', bottom: 50, width:width*0.5, alignSelf:'center', flexDirection:'row'}}

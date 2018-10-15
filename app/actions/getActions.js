@@ -18,3 +18,10 @@ export function getUserUID(userUID){
     userUID,
   }
 }
+
+export function getUserName(userName){
+  return {
+    type: types.GET_USER_NAME,
+    userName,
+  }
+}

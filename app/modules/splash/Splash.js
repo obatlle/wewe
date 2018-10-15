@@ -53,8 +53,9 @@ class Splash extends React.Component {
     firebase.auth().onAuthStateChanged((user) => {
       const { navigate } = this.props.navigation;
       if (user != null) {
-        console.log(user.uid)
+        console.log(user.providerData[0].displayName)
         this.props.getUserUID(user.uid)
+        this.props.getUserName(user.providerData[0].displayName)
         this.setState({isLoggedIn:true});
         navigate('Home')
       } else {
@@ -86,6 +87,7 @@ function mapDispatchToProps (dispatch) {
 function mapStateToProps (state) {
   return {
         userUID: state.getUserUID,
+        userName: state.getUserName,
   };
 }
 
