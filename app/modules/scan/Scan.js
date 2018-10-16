@@ -43,6 +43,7 @@ class Scan extends React.Component {
           productInfo: null,
           unkownProduct:null,
     };
+    this.props.getBarcode(null)
   }
 
   _requestCameraPermission = async () => {
@@ -54,6 +55,7 @@ class Scan extends React.Component {
 
   _handleBarCodeRead = data => {
     const { getProductInfo } = this.props;
+    this.props.getBarcode(JSON.stringify(data.data))
     axios.get('https://world.openfoodfacts.org/api/v0/product/'+JSON.stringify(data.data)+'.json')
     .then(response => {
       JSON.stringify(response.length>=100)?
@@ -76,6 +78,11 @@ class Scan extends React.Component {
 
   componentWillUnmount(){
        clearTimeout(this.timeoutHandle);
+  }
+
+  addProduct = (barcode) => {
+    const { navigate } = this.props.navigation;
+    navigate('AddProduct')
   }
 
   render() {
@@ -115,7 +122,7 @@ class Scan extends React.Component {
                     full
                     rounded
                     success
-                    onPress={() => navigate('Scan')}
+                    onPress={() => this.addProduct()}
                   >
                     <Text style={{color:'white', marginLeft:8}}>Add it to Zebra</Text>
                   </Button>
@@ -142,6 +149,7 @@ function mapDispatchToProps (dispatch) {
 function mapStateToProps (state) {
   return {
     productInfo: state.getProductInfo,
+    barcode: state.getBarcode,
     //recipeCount: state.recipeCount,
     //highscore: state.highscore
   };

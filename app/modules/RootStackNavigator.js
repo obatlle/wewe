@@ -10,6 +10,7 @@ import Scan from './scan/Scan';
 import ProductDetail from './productDetail/ProductDetail';
 import HistoricalList from './historicalList/HistoricalList';
 import Profile from './profile/Profile';
+import AddProduct from './addProduct/AddProduct';
 
 const MainStack = StackNavigator(
   {
@@ -33,6 +34,9 @@ const MainStack = StackNavigator(
     },
     Profile: {
       screen: Profile,
+    },
+    AddProduct: {
+      screen: AddProduct,
     },
   },
   {

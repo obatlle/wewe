@@ -25,3 +25,10 @@ export function getUserName(userName){
     userName,
   }
 }
+
+export function getBarcode(barcode){
+  return {
+    type: types.GET_BARCODE,
+    barcode,
+  }
+}

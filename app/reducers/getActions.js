@@ -22,3 +22,10 @@ export const getUserName = createReducer('',{
     return action.userName;
   }
 });
+
+export const getBarcode = createReducer('',{
+  [types.GET_BARCODE](state, action){
+    console.log('reducer state:')
+    return action.barcode;
+  }
+});
