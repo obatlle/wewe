@@ -15,6 +15,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import * as firebase from 'firebase';
 
+import I18n from 'react-native-i18n'
+
 
 var {height, width} = Dimensions.get('window');
 
@@ -25,6 +27,10 @@ const  { color, padding, windowWidth, normalize, fontSize, fontFamily } = theme;
 
 
 class ProductDetail extends React.Component {
+
+  componentWillMount(){
+    I18n.initAsync();
+  }
 
   componentDidMount(){
     const analytics = new Analytics('UA-126042363-1');
@@ -669,7 +675,7 @@ class ProductDetail extends React.Component {
           onPress={() => {navigate('Scan')}}
         >
           <MaterialCommunityIcons style={{}} name="barcode-scan" size={30} color="white" />
-          <Text style={[styles.textField,styles.scanButtonText]}>Scan</Text>
+          <Text style={[styles.textField,styles.scanButtonText]}>{I18n.t('scan')}</Text>
         </Button>
         <View style={{position:'absolute', bottom:0}} >
           <Tabbar navigation={this.props.navigation}>
@@ -677,6 +683,18 @@ class ProductDetail extends React.Component {
         </View>
       </View>
     );
+  }
+}
+
+
+I18n.fallbacks = true
+
+I18n.translations = {
+  en: {
+    scan: 'Scan'
+  },
+  es: {
+    greeting: 'Escanea'
   }
 }
 
