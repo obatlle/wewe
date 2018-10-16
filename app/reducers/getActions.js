@@ -29,3 +29,10 @@ export const getBarcode = createReducer('',{
     return action.barcode;
   }
 });
+
+export const getFilterColor = createReducer('',{
+  [types.GET_FILTER_COLOR](state, action){
+    console.log('reducer state:')
+    return action.filterColor;
+  }
+});

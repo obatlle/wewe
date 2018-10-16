@@ -56,16 +56,36 @@ class HistoricalList extends React.Component {
     analytics.hit(new ScreenHit('HistoricalList'))
       .then(() => console.log("success"))
       .catch(e => console.log(e.message));
+      this.props.getFilterColor('')
+
+      if(this.props.filterColor=='darkgreen'){
+        this.setState({list_title:'Excellent'})
+      }else if (this.props.filterColor=='green'){
+        this.setState({list_title:'Good'})
+      }else if(this.props.filterColor=='yellow'){
+        this.setState({list_title:'Medium'})
+      }else if(this.props.filterColor=='orange'){
+        this.setState({list_title:'Regular'})
+      }else if(this.props.filterColor=='red'){
+        this.setState({list_title:'Bad'})
+      }
   }
+
+
 
   constructor(props) {
     super(props);
     this.state = {
+      list_title: '',
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       })
     };
-    this.itemsRef = firebase.database().ref('Scanned/'+this.props.userUID+'/');
+    if (this.props.filterColor!=''){
+        this.itemsRef = firebase.database().ref('Scanned/'+this.props.userUID+'/').orderByChild("score_color").equalTo(this.props.filterColor)
+    }else{
+      this.itemsRef = firebase.database().ref('Scanned/'+this.props.userUID+'/');
+    }
   }
 
   _renderItem(item) {
@@ -95,7 +115,11 @@ class HistoricalList extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text style={{fontFamily:'RobotoBold', fontWeight:'400', fontSize:20, color:'#9E9E9E', marginTop:30, textAlign:'center'}}>Historical list</Text>
+        {this.state.list_title==''?(
+          <Text style={{fontFamily:'RobotoBold', fontWeight:'400', fontSize:20, color:'#9E9E9E', marginTop:30, textAlign:'center'}}>Historical list</Text>
+        ):(
+          <Text style={{fontFamily:'RobotoBold', fontWeight:'400', fontSize:20, color:'#9E9E9E', marginTop:30, textAlign:'center'}}>{this.state.list_title} Products</Text>
+        )}
         <View style={styles.cardContianer}>
           <View>
             <Image style={styles.backgroundCardImage} source={require('../../assets/images/background2.png')}/>
@@ -128,6 +152,7 @@ function mapStateToProps (state) {
   return {
     userUID: state.getUserUID,
     productInfo: state.getProductInfo,
+    filterColor: state.getFilterColor,
   };
 }
 

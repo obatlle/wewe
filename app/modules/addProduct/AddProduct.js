@@ -29,7 +29,6 @@ class AddProduct extends React.Component {
     analytics.hit(new ScreenHit('AddProduct'))
       .then(() => console.log("success"))
       .catch(e => console.log(e.message));
-    this.readUserData()
   }
 
   constructor(props) {
@@ -55,7 +54,7 @@ class AddProduct extends React.Component {
 
     let created_at = Math.floor(Date.now() / 1000);
 
-    let code= this.props.barcode
+    let code= (this.props.barcode).replace(/\"/gi,'')
     let product_name=this.state.product_name
     let product_brand=this.state.product_brand
     let calories_value=this.state.calories_value
@@ -67,6 +66,34 @@ class AddProduct extends React.Component {
     let additive_value=this.state.additive_value
     let fruit_value=this.state.fruit_value
 
+    firebase.database().ref('Products/'+code+'/').set({
+      product_name,
+      product_brand,
+      code,
+      calories_value,
+      sugar_value,
+      salt_value,
+      fat_value,
+      fiber_value,
+      protein_value,
+      additive_value,
+      fruit_value,
+      created_at
+    }).then((data)=>{
+        //success callback
+        console.log('data ' , data)
+    }).catch((error)=>{
+        //error callback
+        console.log('error ' , error)
+    })
+
+
+
+    console.log('Product added')
+    navigate('HistoricalList')
+  }
+
+  test = () => {
     firebase.database().ref('Products/'+code+'/').set({
         product_name,
         product_brand,
@@ -87,10 +114,7 @@ class AddProduct extends React.Component {
         //error callback
         console.log('error ' , error)
     })
-
-    console.log('Product added')
   }
-
 
 
   render() {
@@ -180,7 +204,7 @@ class AddProduct extends React.Component {
                 onChangeText={(additive_value) => this.setState({ additive_value })}
               />
             </Item>
-            <View style={{marginTop:30}}
+            <View style={{marginTop:30}}>
             </View>
             <Button style={{ marginTop: 10 }}
               full

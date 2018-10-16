@@ -15,7 +15,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import * as firebase from 'firebase';
 
-import I18n from 'react-native-i18n'
+import I18n from 'ex-react-native-i18n'
 
 
 var {height, width} = Dimensions.get('window');

@@ -51,42 +51,21 @@ class Profile extends React.Component {
 
 
       var ref = firebase.database().ref('Scanned/'+userID+'/');
-      var query = ref.orderByChild("score_color").equalTo('red');
-      query.once("value", (snapshot)=> {
-        snapshot.forEach((child)=> {
-          this.setState({red_products:Object.keys(snapshot.val()).length})
-        });
-      });
 
-      var ref = firebase.database().ref('Scanned/'+userID+'/');
-      var query = ref.orderByChild("score_color").equalTo('yellow');
-      query.once("value", (snapshot) =>{
+      ref.once("value", (snapshot)=> {
         snapshot.forEach((child)=> {
-          this.setState({yellow_products:Object.keys(snapshot.val()).length})
-        });
-      });
-
-      var ref = firebase.database().ref('Scanned/'+userID+'/');
-      var query = ref.orderByChild("score_color").equalTo('green');
-      query.once("value", (snapshot)=> {
-        snapshot.forEach((child)=> {
-          this.setState({green_products:Object.keys(snapshot.val()).length})
-        });
-      });
-
-      var ref = firebase.database().ref('Scanned/'+userID+'/');
-      var query = ref.orderByChild("score_color").equalTo('orange');
-      query.once("value", (snapshot)=> {
-        snapshot.forEach((child)=> {
-          this.setState({orange_products:Object.keys(snapshot.val()).length})
-        });
-      });
-
-      var ref = firebase.database().ref('Scanned/'+userID+'/');
-      var query = ref.orderByChild("score_color").equalTo('darkgreen');
-      query.once("value", (snapshot)=> {
-        snapshot.forEach((child)=> {
-          this.setState({darkgreen_products:Object.keys(snapshot.val()).length})
+          console.log(child.val().score_color)
+          if(child.val().score_color=='darkgreen'){
+            this.setState({darkgreen_products:this.state.darkgreen_products+1})
+          }else if(child.val().score_color=='green'){
+            this.setState({green_products:this.state.green_products+1})
+          }else if(child.val().score_color=='yellow'){
+            this.setState({yellow_products:this.state.yellow_products+1})
+          }else if(child.val().score_color=='orange'){
+            this.setState({orange_products:this.state.orange_products+1})
+          }else if(child.val().score_color=='red'){
+            this.setState({red_products:this.state.red_products+1})
+          }
         });
       });
 
@@ -123,62 +102,72 @@ class Profile extends React.Component {
                   colors={colors}
               />
               <View>
-                <TouchableWithoutFeedback onPress={() => navigate('HistoricalList')}>
-                  <View style={{marginTop:30, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
-                  <View style={{flexDirection:'row'}}>
-                    <View style={{height:15, width:15, borderRadius:15, backgroundColor:'darkgreen', marginLeft:30, marginTop:15}} />
-                    <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Excellent</Text>
-                    <View style={{flex:1}} />
-                    <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.darkgreen_products}</Text>
-                    <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
+                <TouchableWithoutFeedback onPress={() => {navigate('HistoricalList'); this.props.getFilterColor('darkgreen')}}>
+                  <View>
+                    <View style={{marginTop:30, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+                    <View style={{flexDirection:'row'}}>
+                      <View style={{height:15, width:15, borderRadius:15, backgroundColor:'darkgreen', marginLeft:30, marginTop:15}} />
+                      <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Excellent</Text>
+                      <View style={{flex:1}} />
+                      <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.darkgreen_products}</Text>
+                      <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
+                    </View>
                   </View>
                 </TouchableWithoutFeedback>
               </View>
               <View>
-                <TouchableWithoutFeedback onPress={() => navigate('HistoricalList')}>
-                  <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
-                  <View style={{flexDirection:'row'}}>
-                    <View style={{height:15, width:15, borderRadius:15, backgroundColor:'green', marginLeft:30, marginTop:15}} />
-                    <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Good</Text>
-                    <View style={{flex:1}} />
-                    <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.green_products}</Text>
-                    <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
+                <TouchableWithoutFeedback onPress={() => {navigate('HistoricalList'); this.props.getFilterColor('green')}}>
+                  <View>
+                    <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+                    <View style={{flexDirection:'row'}}>
+                      <View style={{height:15, width:15, borderRadius:15, backgroundColor:'green', marginLeft:30, marginTop:15}} />
+                      <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Good</Text>
+                      <View style={{flex:1}} />
+                      <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.green_products}</Text>
+                      <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
+                    </View>
                   </View>
                 </TouchableWithoutFeedback>
               </View>
               <View>
-                <TouchableWithoutFeedback onPress={() => navigate('HistoricalList')}>
-                  <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
-                  <View style={{flexDirection:'row'}}>
-                    <View style={{height:15, width:15, borderRadius:15, backgroundColor:'yellow', marginLeft:30, marginTop:15}} />
-                    <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Medium</Text>
-                    <View style={{flex:1}} />
-                    <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.yellow_products}</Text>
-                    <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
+                <TouchableWithoutFeedback onPress={() => {navigate('HistoricalList'); this.props.getFilterColor('yellow')}}>
+                  <View>
+                    <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+                    <View style={{flexDirection:'row'}}>
+                      <View style={{height:15, width:15, borderRadius:15, backgroundColor:'yellow', marginLeft:30, marginTop:15}} />
+                      <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Medium</Text>
+                      <View style={{flex:1}} />
+                      <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.yellow_products}</Text>
+                      <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
+                    </View>
                   </View>
                 </TouchableWithoutFeedback>
               </View>
               <View>
-                <TouchableWithoutFeedback onPress={() => navigate('HistoricalList')}>
-                <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
-                  <View style={{flexDirection:'row'}}>
-                    <View style={{height:15, width:15, borderRadius:15, backgroundColor:'orange', marginLeft:30, marginTop:15}} />
-                    <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Regular</Text>
-                    <View style={{flex:1}} />
-                    <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.orange_products}</Text>
-                    <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
-                  </View>
+                <TouchableWithoutFeedback onPress={() => {navigate('HistoricalList'); this.props.getFilterColor('orange')}}>
+                  <View>
+                    <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+                      <View style={{flexDirection:'row'}}>
+                        <View style={{height:15, width:15, borderRadius:15, backgroundColor:'orange', marginLeft:30, marginTop:15}} />
+                        <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Regular</Text>
+                        <View style={{flex:1}} />
+                        <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.orange_products}</Text>
+                        <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
+                      </View>
+                    </View>
                 </TouchableWithoutFeedback>
               </View>
               <View>
-                <TouchableWithoutFeedback onPress={() => navigate('HistoricalList')}>
-                  <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
-                  <View style={{flexDirection:'row'}}>
-                    <View style={{height:15, width:15, borderRadius:15, backgroundColor:'red', marginLeft:30, marginTop:15}} />
-                    <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Bad</Text>
-                    <View style={{flex:1}} />
-                    <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.red_products}</Text>
-                    <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
+                <TouchableWithoutFeedback onPress={() => {navigate('HistoricalList'); this.props.getFilterColor('red')}}>
+                  <View>
+                    <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+                    <View style={{flexDirection:'row'}}>
+                      <View style={{height:15, width:15, borderRadius:15, backgroundColor:'red', marginLeft:30, marginTop:15}} />
+                      <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Bad</Text>
+                      <View style={{flex:1}} />
+                      <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.red_products}</Text>
+                      <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
+                    </View>
                   </View>
                 </TouchableWithoutFeedback>
                 <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
@@ -215,6 +204,7 @@ function mapStateToProps (state) {
   return {
         userUID: state.getUserUID,
         userName: state.getUserName,
+        filterColor: state.getFilterColor,
   };
 }
 

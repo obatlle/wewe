@@ -58,11 +58,13 @@ class Scan extends React.Component {
     this.props.getBarcode(JSON.stringify(data.data))
     axios.get('https://world.openfoodfacts.org/api/v0/product/'+JSON.stringify(data.data)+'.json')
     .then(response => {
-      JSON.stringify(response.length>=100)?
+      //console.log(response.data.status==0)
+      (JSON.stringify(response.length>=100) && (response.data.status!=0))?
       (this.setState({unkownProduct:false,loadedProductInfo:this.state.loadedProductInfo+1}), this.props.getProductInfo(response)
     ):(
       this.setState({unkownProduct:true})
-    )});
+    )
+      });
   };
 
   componentDidUpdate(){

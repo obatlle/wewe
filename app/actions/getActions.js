@@ -32,3 +32,10 @@ export function getBarcode(barcode){
     barcode,
   }
 }
+
+export function getFilterColor(filterColor){
+  return {
+    type: types.GET_FILTER_COLOR,
+    filterColor,
+  }
+}
