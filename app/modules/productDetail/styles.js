@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 0,
-    backgroundColor: 'white',
+    backgroundColor: '#F1F5F8',
   },
   cardContianer:{
     position:'absolute',

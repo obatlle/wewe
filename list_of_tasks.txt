@@ -1,0 +1,17 @@
+Translate
+Add product details
+Add product image to firebase storage
+Product not Found
+Improve scan UX
+Improve profile UX
+Icon squared
+Search on firebase if item not Found
+Load items in reversed order
+Tabbar highlight when product detail or Add product screens
+ Login focus on email Textinput
+Login tutorial
+Tutorial Historicallist if no item is loadedProductInfo
+Home remove search bar
+Improve codebar scanner (smaller view)
+Add flashlight in the scann screen
+Logout button on the Profile

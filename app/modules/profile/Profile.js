@@ -96,81 +96,86 @@ class Profile extends React.Component {
         <View style={{flex:1}}>
           <Text style={{marginTop:40,fontSize:24, fontFamily:'RobotoBold', color:'#9E9E9E', alignSelf:'center'}}>{this.props.userName} food</Text>
           <View style={{marginTop:20}}>
-            <PieChart
-                  style={ { height: 200 } }
-                  data={ pieData }
-                  colors={colors}
-              />
-              <View>
-                <TouchableWithoutFeedback onPress={() => {navigate('HistoricalList'); this.props.getFilterColor('darkgreen')}}>
-                  <View>
-                    <View style={{marginTop:30, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
-                    <View style={{flexDirection:'row'}}>
-                      <View style={{height:15, width:15, borderRadius:15, backgroundColor:'darkgreen', marginLeft:30, marginTop:15}} />
-                      <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Excellent</Text>
-                      <View style={{flex:1}} />
-                      <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.darkgreen_products}</Text>
-                      <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
-                    </View>
-                  </View>
-                </TouchableWithoutFeedback>
+            <View style={{backgroundColor:'white', borderRadius:208, width:208, alignSelf:'center'}}>
+              <PieChart
+                    style={ { height: 200, margin:4 } }
+                    data={ pieData }
+                    colors={colors}
+                />
               </View>
-              <View>
-                <TouchableWithoutFeedback onPress={() => {navigate('HistoricalList'); this.props.getFilterColor('green')}}>
-                  <View>
-                    <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
-                    <View style={{flexDirection:'row'}}>
-                      <View style={{height:15, width:15, borderRadius:15, backgroundColor:'green', marginLeft:30, marginTop:15}} />
-                      <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Good</Text>
-                      <View style={{flex:1}} />
-                      <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.green_products}</Text>
-                      <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
-                    </View>
-                  </View>
-                </TouchableWithoutFeedback>
-              </View>
-              <View>
-                <TouchableWithoutFeedback onPress={() => {navigate('HistoricalList'); this.props.getFilterColor('yellow')}}>
-                  <View>
-                    <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
-                    <View style={{flexDirection:'row'}}>
-                      <View style={{height:15, width:15, borderRadius:15, backgroundColor:'yellow', marginLeft:30, marginTop:15}} />
-                      <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Medium</Text>
-                      <View style={{flex:1}} />
-                      <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.yellow_products}</Text>
-                      <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
-                    </View>
-                  </View>
-                </TouchableWithoutFeedback>
-              </View>
-              <View>
-                <TouchableWithoutFeedback onPress={() => {navigate('HistoricalList'); this.props.getFilterColor('orange')}}>
-                  <View>
-                    <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+              <MaterialCommunityIcons style={{marginTop:-130, alignSelf:'center'}} name="food" size={50} color="#9E9E9E" />
+              <View style={{marginTop:100, marginLeft:8, marginRight:8, backgroundColor:'white', borderRadius:15}}>
+                <View >
+                  <TouchableWithoutFeedback onPress={() => {navigate('HistoricalList'); this.props.getFilterColor('darkgreen')}}>
+                    <View>
+                      <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center'}}/>
                       <View style={{flexDirection:'row'}}>
-                        <View style={{height:15, width:15, borderRadius:15, backgroundColor:'orange', marginLeft:30, marginTop:15}} />
-                        <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Regular</Text>
+                        <View style={{height:15, width:15, borderRadius:15, backgroundColor:'darkgreen', marginLeft:30, marginTop:15}} />
+                        <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Excellent</Text>
                         <View style={{flex:1}} />
-                        <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.orange_products}</Text>
-                        <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
+                        <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.darkgreen_products}</Text>
+                        <MaterialCommunityIcons style={{marginTop:16,marginRight:12}} name="chevron-right" size={20} color="#9E9E9E" />
                       </View>
                     </View>
-                </TouchableWithoutFeedback>
-              </View>
-              <View>
-                <TouchableWithoutFeedback onPress={() => {navigate('HistoricalList'); this.props.getFilterColor('red')}}>
-                  <View>
-                    <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
-                    <View style={{flexDirection:'row'}}>
-                      <View style={{height:15, width:15, borderRadius:15, backgroundColor:'red', marginLeft:30, marginTop:15}} />
-                      <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Bad</Text>
-                      <View style={{flex:1}} />
-                      <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.red_products}</Text>
-                      <MaterialCommunityIcons style={{marginTop:16,marginRight:10}} name="chevron-right" size={20} color="#9E9E9E" />
+                  </TouchableWithoutFeedback>
+                </View>
+                <View>
+                  <TouchableWithoutFeedback onPress={() => {navigate('HistoricalList'); this.props.getFilterColor('green')}}>
+                    <View>
+                      <View style={{marginTop:10, height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+                      <View style={{flexDirection:'row'}}>
+                        <View style={{height:15, width:15, borderRadius:15, backgroundColor:'green', marginLeft:30, marginTop:15}} />
+                        <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Good</Text>
+                        <View style={{flex:1}} />
+                        <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.green_products}</Text>
+                        <MaterialCommunityIcons style={{marginTop:16,marginRight:12}} name="chevron-right" size={20} color="#9E9E9E" />
+                      </View>
                     </View>
-                  </View>
-                </TouchableWithoutFeedback>
-                <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+                  </TouchableWithoutFeedback>
+                </View>
+                <View>
+                  <TouchableWithoutFeedback onPress={() => {navigate('HistoricalList'); this.props.getFilterColor('yellow')}}>
+                    <View>
+                      <View style={{marginTop:10, height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+                      <View style={{flexDirection:'row'}}>
+                        <View style={{height:15, width:15, borderRadius:15, backgroundColor:'yellow', marginLeft:30, marginTop:15}} />
+                        <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Medium</Text>
+                        <View style={{flex:1}} />
+                        <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.yellow_products}</Text>
+                        <MaterialCommunityIcons style={{marginTop:16,marginRight:12}} name="chevron-right" size={20} color="#9E9E9E" />
+                      </View>
+                    </View>
+                  </TouchableWithoutFeedback>
+                </View>
+                <View>
+                  <TouchableWithoutFeedback onPress={() => {navigate('HistoricalList'); this.props.getFilterColor('orange')}}>
+                    <View>
+                      <View style={{marginTop:10, height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+                        <View style={{flexDirection:'row'}}>
+                          <View style={{height:15, width:15, borderRadius:15, backgroundColor:'orange', marginLeft:30, marginTop:15}} />
+                          <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Regular</Text>
+                          <View style={{flex:1}} />
+                          <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.orange_products}</Text>
+                          <MaterialCommunityIcons style={{marginTop:16,marginRight:12}} name="chevron-right" size={20} color="#9E9E9E" />
+                        </View>
+                      </View>
+                  </TouchableWithoutFeedback>
+                </View>
+                <View>
+                  <TouchableWithoutFeedback onPress={() => {navigate('HistoricalList'); this.props.getFilterColor('red')}}>
+                    <View>
+                      <View style={{marginTop:10, height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
+                      <View style={{flexDirection:'row'}}>
+                        <View style={{height:15, width:15, borderRadius:15, backgroundColor:'red', marginLeft:30, marginTop:15}} />
+                        <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Bad</Text>
+                        <View style={{flex:1}} />
+                        <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.red_products}</Text>
+                        <MaterialCommunityIcons style={{marginTop:16,marginRight:12}} name="chevron-right" size={20} color="#9E9E9E" />
+                      </View>
+                    </View>
+                  </TouchableWithoutFeedback>
+                  <View style={{marginTop:10, marginBottom:10, height:0.5, width:width*0.9, alignSelf:'center'}}/>
+                </View>
               </View>
 
             </View>

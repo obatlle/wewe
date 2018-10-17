@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View , Alert, Dimensions, TouchableWithoutFeedback} from 'react-native';
+import { StyleSheet, Text, View , Alert, Dimensions, TouchableWithoutFeedback, Animated, Easing, Image} from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
 
 import styles from "./styles";
@@ -32,6 +32,7 @@ class Scan extends React.Component {
       .catch(e => console.log(e.message));
     this._requestCameraPermission();
 
+    this.animate()
 
   }
 
@@ -44,7 +45,20 @@ class Scan extends React.Component {
           unkownProduct:null,
     };
     this.props.getBarcode(null)
+    this.animatedValue = new Animated.Value(0)
   }
+
+  animate () {
+      this.animatedValue.setValue(0)
+      Animated.timing(
+        this.animatedValue,
+        {
+          toValue: 1,
+          duration: 2000,
+          easing: Easing.linear
+        }
+      ).start(() => this.animate())
+    }
 
   _requestCameraPermission = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -91,6 +105,13 @@ class Scan extends React.Component {
 
     const { goBack } = this.props.navigation;
 
+
+    const movingMargin = this.animatedValue.interpolate({
+      inputRange: [0, 0.5, 1],
+      outputRange: [0, height*0.15, 0]
+    })
+
+
     return (
       <View style={styles.container}>
         {this.state.hasCameraPermission === null ?
@@ -108,10 +129,35 @@ class Scan extends React.Component {
                 </View>
               </BarCodeScanner>
               <View style={{width:width*0.8, height:height*0.3, position:'absolute', bottom:height*0.4, alignSelf:'center'}}>
-                <Text style={{alignSelf:'center', fontSize: 18, color:'white',fontFamily:'RobotoLight',marginBottom:12}}>Scan a product barcode</Text>
+                <Text style={{alignSelf:'center', fontSize: 18, color:'#F1F5F8',fontFamily:'RobotoMedium',marginBottom:12}}>Scan a product barcode</Text>
                 <View style={{borderColor:'white', borderRadius:10, borderWidth:2, width:width*0.8, flex:1, alignSelf:'center'}}>
-                  <View style={{backgroundColor:'red', height:1.5, width:width*0.65, alignSelf:'center', marginTop: height*0.12}}>
+                <View style={{flexDirection:'row', alignSelf:'center', marginTop:height*0.03}}>
+                  <View  style={{height:height*0.18, width:width*0.008, backgroundColor:'white', opacity:0.3}}/>
+                  <View  style={{height:height*0.18, width:width*0.002, backgroundColor:'white', opacity:0.3, marginLeft:10}}/>
+                  <View  style={{height:height*0.18, width:width*0.015, backgroundColor:'white', opacity:0.3, marginLeft:10}}/>
+                  <View  style={{height:height*0.18, width:width*0.023, backgroundColor:'white', opacity:0.3, marginLeft:6}}/>
+                  <View  style={{height:height*0.18, width:width*0.005, backgroundColor:'white', opacity:0.3, marginLeft:6}}/>
+                  <View  style={{height:height*0.18, width:width*0.018, backgroundColor:'white', opacity:0.3, marginLeft:8}}/>
+                  <View  style={{height:height*0.18, width:width*0.002, backgroundColor:'white', opacity:0.3, marginLeft:9}}/>
+                  <View  style={{height:height*0.18, width:width*0.03, backgroundColor:'white', opacity:0.3, marginLeft:7}}/>
+                  <View  style={{height:height*0.18, width:width*0.012, backgroundColor:'white', opacity:0.3, marginLeft:4}}/>
+                  <View  style={{height:height*0.18, width:width*0.006, backgroundColor:'white', opacity:0.3, marginLeft:8}}/>
+                  <View  style={{height:height*0.18, width:width*0.002, backgroundColor:'white', opacity:0.3, marginLeft:11}}/>
+                  <View  style={{height:height*0.18, width:width*0.024, backgroundColor:'white', opacity:0.3, marginLeft:9}}/>
+                  <View  style={{height:height*0.18, width:width*0.01, backgroundColor:'white', opacity:0.3, marginLeft:6}}/>
+                  <View  style={{height:height*0.18, width:width*0.024, backgroundColor:'white', opacity:0.3, marginLeft:5}}/>
+                  <View  style={{height:height*0.18, width:width*0.002, backgroundColor:'white', opacity:0.3, marginLeft:8}}/>
+                  <View  style={{height:height*0.18, width:width*0.002, backgroundColor:'white', opacity:0.3, marginLeft:11}}/>
+                  <View  style={{height:height*0.18, width:width*0.01, backgroundColor:'white', opacity:0.3, marginLeft:12}}/>
+                  <View  style={{height:height*0.18, width:width*0.026, backgroundColor:'white', opacity:0.3, marginLeft:4}}/>
+                  <View  style={{height:height*0.18, width:width*0.002, backgroundColor:'white', opacity:0.3, marginLeft:6}}/>
+                </View>
+                <Animated.View
+                  style={{
+                    marginBottom: movingMargin, marginTop: -height*0.2}}/>
+                  <View style={{backgroundColor:'red', opacity:0.5, height:2.5, width:width*0.65, alignSelf:'center', marginTop:20}}>
                   </View>
+
                 </View>
               </View>
               {this.state.unkownProduct==true?(
