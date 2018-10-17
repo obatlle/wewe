@@ -23,7 +23,7 @@ class Tabbar extends Component {
 
     return (
       <View style={{width:  width, height:45, backgroundColor:'white'}}>
-        <View style={{height:0.2, width:width, backgroundColor:'#F0F0F0'}}/>
+        <View style={{height:0.5, width:width, backgroundColor:'#F0F0F0'}}/>
         <View style={{flexDirection:'row'}}>
           <TouchableOpacity style={{height:45,width:width/4}} onPress={() => navigate('Home')}>
             <View style={{flex:1, alignItems:'center'}}>

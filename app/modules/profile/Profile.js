@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, TouchableWithoutFeedback  } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, TouchableWithoutFeedback ,Image, ScrollView } from 'react-native';
 
 import { Button } from 'native-base';
 
@@ -93,8 +93,12 @@ class Profile extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={{flex:1}}>
-          <Text style={{marginTop:40,fontSize:24, fontFamily:'RobotoBold', color:'#9E9E9E', alignSelf:'center'}}>{this.props.userName} food</Text>
+        <Image
+          style={{position:'absolute', top:0, width:width}}
+          source={require('../../assets/images/background3.png')}
+        />
+        <ScrollView style={{flex:1}}>
+          <Text style={{marginTop:40,fontSize:24, fontFamily:'RobotoBold', color:'white', alignSelf:'center'}}>{this.props.userName} food</Text>
           <View style={{marginTop:20}}>
             <View style={{backgroundColor:'white', borderRadius:208, width:208, alignSelf:'center'}}>
               <PieChart
@@ -111,9 +115,9 @@ class Profile extends React.Component {
                       <View style={{marginTop:10, height:0.5, width:width*0.95, alignSelf:'center'}}/>
                       <View style={{flexDirection:'row'}}>
                         <View style={{height:15, width:15, borderRadius:15, backgroundColor:'darkgreen', marginLeft:30, marginTop:15}} />
-                        <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Excellent</Text>
+                        <Text style={{fontSize:18, marginLeft:15, marginTop:12, fontFamily:'RobotoRegular'}}>Excellent</Text>
                         <View style={{flex:1}} />
-                        <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.darkgreen_products}</Text>
+                        <Text  style={{fontSize:18, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.darkgreen_products}</Text>
                         <MaterialCommunityIcons style={{marginTop:16,marginRight:12}} name="chevron-right" size={20} color="#9E9E9E" />
                       </View>
                     </View>
@@ -125,9 +129,9 @@ class Profile extends React.Component {
                       <View style={{marginTop:10, height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
                       <View style={{flexDirection:'row'}}>
                         <View style={{height:15, width:15, borderRadius:15, backgroundColor:'green', marginLeft:30, marginTop:15}} />
-                        <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Good</Text>
+                        <Text style={{fontSize:18, marginLeft:15, marginTop:12, fontFamily:'RobotoRegular'}}>Good</Text>
                         <View style={{flex:1}} />
-                        <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.green_products}</Text>
+                        <Text  style={{fontSize:18, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.green_products}</Text>
                         <MaterialCommunityIcons style={{marginTop:16,marginRight:12}} name="chevron-right" size={20} color="#9E9E9E" />
                       </View>
                     </View>
@@ -139,9 +143,9 @@ class Profile extends React.Component {
                       <View style={{marginTop:10, height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
                       <View style={{flexDirection:'row'}}>
                         <View style={{height:15, width:15, borderRadius:15, backgroundColor:'yellow', marginLeft:30, marginTop:15}} />
-                        <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Medium</Text>
+                        <Text style={{fontSize:18, marginLeft:15, marginTop:12, fontFamily:'RobotoRegular'}}>Medium</Text>
                         <View style={{flex:1}} />
-                        <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.yellow_products}</Text>
+                        <Text  style={{fontSize:18, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.yellow_products}</Text>
                         <MaterialCommunityIcons style={{marginTop:16,marginRight:12}} name="chevron-right" size={20} color="#9E9E9E" />
                       </View>
                     </View>
@@ -153,9 +157,9 @@ class Profile extends React.Component {
                       <View style={{marginTop:10, height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
                         <View style={{flexDirection:'row'}}>
                           <View style={{height:15, width:15, borderRadius:15, backgroundColor:'orange', marginLeft:30, marginTop:15}} />
-                          <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Regular</Text>
+                          <Text style={{fontSize:18, marginLeft:15, marginTop:12, fontFamily:'RobotoRegular'}}>Regular</Text>
                           <View style={{flex:1}} />
-                          <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.orange_products}</Text>
+                          <Text  style={{fontSize:18, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.orange_products}</Text>
                           <MaterialCommunityIcons style={{marginTop:16,marginRight:12}} name="chevron-right" size={20} color="#9E9E9E" />
                         </View>
                       </View>
@@ -167,9 +171,9 @@ class Profile extends React.Component {
                       <View style={{marginTop:10, height:0.5, width:width*0.9, alignSelf:'center', backgroundColor:'#9E9E9E'}}/>
                       <View style={{flexDirection:'row'}}>
                         <View style={{height:15, width:15, borderRadius:15, backgroundColor:'red', marginLeft:30, marginTop:15}} />
-                        <Text style={{fontSize:20, marginLeft:15, marginTop:11, fontFamily:'RobotoRegular'}}>Bad</Text>
+                        <Text style={{fontSize:18, marginLeft:15, marginTop:12, fontFamily:'RobotoRegular'}}>Bad</Text>
                         <View style={{flex:1}} />
-                        <Text  style={{fontSize:20, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.red_products}</Text>
+                        <Text  style={{fontSize:18, marginRight:5, marginTop:13, fontFamily:'RobotoRegular'}}>{this.state.red_products}</Text>
                         <MaterialCommunityIcons style={{marginTop:16,marginRight:12}} name="chevron-right" size={20} color="#9E9E9E" />
                       </View>
                     </View>
@@ -179,7 +183,7 @@ class Profile extends React.Component {
               </View>
 
             </View>
-        </View>
+        </ScrollView>
         <Button style={{position:'absolute', bottom: 50, width:width*0.5, alignSelf:'center', flexDirection:'row'}}
           full
           rounded

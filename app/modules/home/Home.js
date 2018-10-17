@@ -74,8 +74,8 @@ export default class Home extends React.Component {
               <View style={styles.searchBar}>
                 <View style={styles.navbarLeftIcon}>
                   <Image
-                    style={{marginTop:10}}
-                    source={require('../../assets/images/app_logo_thumbnail.png')}
+                    style={{marginTop:10, height:30, width:30}}
+                    source={require('../../assets/images/icon.png')}
                   />
                 </View>
                 <View style={styles.searchbarContainer}>

@@ -1,5 +1,5 @@
 Translate
-Add product details
+Add product details to firebase
 Add product image to firebase storage
 Product not Found
 Improve scan UX
@@ -15,3 +15,5 @@ Home remove search bar
 Improve codebar scanner (smaller view)
 Add flashlight in the scann screen
 Logout button on the Profile
+
+-- recomendations
