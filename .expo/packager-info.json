@@ -1,9 +1,9 @@
 {
-  "packagerPort": 19003,
-  "packagerPid": 3076,
+  "packagerPort": 19010,
+  "packagerPid": 24208,
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://pg-euf.obatlle.wewe.exp.direct",
-  "packagerNgrokUrl": "https://packager.pg-euf.obatlle.wewe.exp.direct",
-  "ngrokPid": 16796
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
